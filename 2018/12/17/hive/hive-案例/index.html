@@ -10,6 +10,9 @@
 
     <!--Description-->
     
+        <meta name="description" content="一、
+cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2”\t”$7”\t”$8”\t”$9 &amp;gt;”day01.csv” } ‘cat market.csv |awk  -F ‘,’  ‘{print “2014-01-02">
+    
 
     <!--Author-->
     
@@ -18,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Fecy Note">
+        <meta property="og:title" content="hive 案例">
     
 
     <!--Open Graph Description-->
@@ -29,7 +32,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -40,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Archives: 2018 - Fecy Note</title>
+    <title>hive 案例 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,9 +130,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -137,79 +138,87 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2018</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/mysql-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        mysql 安装
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-案例/">
+                hive 案例
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>一、</p>
+<p>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2”\t”$7”\t”$8”\t”$9 &gt;”day01.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-02””\t”$1”\t”$3”\t”$7”\t”$8”\t”$9 &gt;”day02.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-03””\t”$1”\t”$4”\t”$7”\t”$8”\t”$9 &gt;”day03.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-04””\t”$1”\t”$5”\t”$7”\t”$8”\t”$9 &gt;”day04.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-05””\t”$1”\t”$6”\t”$7”\t”$8”\t”$9 &gt;”day05.csv” } ‘</p>
+<p>二、</p>
+<p> sed -i.bak ‘s#，#\r\n#g’ chinetest.txt</p>
+<p> 三、<br> 建表<br>create table market_sum(<br>product string,<br>price1 double,<br>price2 double,<br>price3 double,<br>price4 double,<br>price5 double,<br>market string,<br>province string,<br>city string<br>) row format delimited<br>fields terminated by “,”;</p>
+<p>读数据<br>load data local inpath’/usr/local/mar/market.csv’ into table market_sum;</p>
+<p>农产品市场个数统计<br>（1）统计每个省份的农产品市场总数 </p>
+<p>select province,count(*)<br>from<br>(select distinct market,province from market_sum ) as m  group by province;</p>
+<p>（2）统计没有农产品市场的省份有哪些 </p>
+<p>1.建省份列表表<br>create table province_table (province string );<br>2.读数据<br>load data local inpath’/usr/local/mar/pro.csv’ into table province_table;<br>3.统计有农产品的省份<br>select distinct province from market_sum;<br>4.统计没有农产品市场的省份</p>
+<p>/<em>使用 not in  适用于单个字段 相同字段</em>/</p>
+<p>select p.province from   province_table  as p<br>where p.province not in (<br>select distinct province from market_sum<br>);</p>
+<p>/<em> 截取前两个字相等 </em>/<br>select p.province from province_table as p<br>left join<br> market_sum as m<br> on substr(p.province,0,2)=substr(m.province,0,2)<br> where m.province is null ;</p>
+<p>（3）统计山东省售卖蛤蜊的农产品市场占全省农产品市场的比例<br>1.山东省 农产品市场</p>
+<p>select m.province, count(*) from<br>(select   market,province  from market_sum where province=”山东”<br> group by market,province) as m<br> group by m.province;</p>
+<p>2.山东省售卖蛤蜊的农产品市场</p>
+<p>select  market,product,province ,count(*)<br>from market_sum<br>where province=”山东” and product=”蛤蜊”<br>group by market,product,province;</p>
+<p>3.求比例<br>select a.c/b.c  from<br>(select product,count(<em>) as c<br>from market_sum<br>where province=”山东” and product=”蛤蜊”<br>group by product,province ) as a<br>,<br>(select m.province, count(</em>) as c  from<br>(select   market,province  from market_sum where province=”山东”<br> group by market,province) as m<br> group by m.province) as b;</p>
+<ol start="4">
+<li>农产品种类统计<br>（1）统计每个省农产品种类总数，找出排名前3的省份</li>
+</ol>
+<p>select province,product,count(1) from market_sum group by province ,product;</p>
+<p>select a.province ,count(*) as c from<br>(select province,product,count(1) from market_sum group by province ,product)<br> as a group by a.province  order by c desc limit 3;</p>
+<p>（2）统计排名前 3 的省份共同拥有的农产品类型</p>
+<p>北京    169<br>江苏    167<br>山东    134</p>
+<p>select a.product from<br>(select  distinct product from market_sum where province=”北京” ) as a  ,<br>(select  distinct product from market_sum where province=”江苏” ) as b  ,<br>(select  distinct product from market_sum where province=”山东” ) as c<br>where a.product=b.product and b.product=c.product<br>;</p>
+<ol start="5">
+<li>价格区间统计 计算山西省的每种农产品的价格波动趋势，即计算每天价格均值。<br>某种农产品的价格均值计算公式： PAVG =(PM1+PM2+…+PMn-max(P)-min(P))/(N-2)<br>其中，P 表示价格，Mn 表示 market，<br>即农产品市场。PM1 表示 M1 农产品市场的该产品 价格，<br>max(P)表示价格最大值，min(P)价格最小值。</li>
+</ol>
+<p>/<em> 有三种以上价格的</em>/<br> select  * from<br> (select a.product ,count(a.price1) as c<br> from<br> (select  price1,product from market_sum<br> where province=”山西”  group by product, price1) as a<br> group by a.product ) as b  where b.c &gt;=3 ;</p>
+<p> /<em> 不足三种价格的</em>/</p>
+<p>  select  b.product from<br> (select a.product ,count(a.price1) as c<br> from<br> (select  price1,product from market_sum<br> where province=”山西”  group by product, price1) as a<br> group by a.product ) as b  where b.c &lt;3 ;</p>
+<p>select  b.product from<br>(select a.product ,count(a.price1) as c<br>from<br>(select  price1,product from market_sum<br>where province=”山西”  group by product, price1) as a<br>group by a.product ) as b  where b.c &lt;3 ;</p>
+<p> /<em> 商品及价格</em>/<br>select  price1,product from market_sum<br>where province=”山西”  group by product, price1;</p>
+<p> select  price1,product from market_sum<br>where province=”山西”  group by product, price1;</p>
+<p> select distinct tmp.product,<br>if(tmp.count &lt;3,<br>if(tmp.count=1,tmp.sum, tmp.sum /2 ),<br>(tmp.sum - tmp.min - tmp.max) / (tmp.count -2)<br>) as result<br>from<br>(select product, price1,<br>min(price1)over(partition by product) as min,<br>max(price1)over(partition by product) as max,<br>sum(price1)over(partition by product) as sum,<br>count(*)over(partition by product) as count<br>from market_sum where province = ‘山西’) as tmp;</p>
+<p>select product,price1,<br>min(price1)over(partition by product) as min,<br>max(price1)over(partition by product) as max,<br>sum(price1)over(partition by product) as sum,<br>count(*)over(partition by product) as count<br>from market_sum where province=’山西’;</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-案例/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 案例
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-总结/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 总结
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 安装
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-使用/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 使用
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-笔记/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-函数大全/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive Hive函数大全
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
+
 
 </div>
 

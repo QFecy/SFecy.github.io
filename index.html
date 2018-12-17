@@ -18,14 +18,14 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Hexo">
+        <meta property="og:title" content="Fecy Note">
     
 
     <!--Open Graph Description-->
     
 
     <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Hexo">
+    <meta property="og:site_name" content="Fecy Note">
 
     <!--Type page-->
     
@@ -40,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>Hexo</title>
+    <title>Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -80,7 +80,7 @@
         <ul>
             
             <li class="menu-item">
-                <a href="/">
+                <a href="/fecy.xyz">
                     Home
                 </a>
             </li>
@@ -92,7 +92,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/about.html">
+                <a href="/about">
                     About
                 </a>
             </li>
@@ -135,7 +135,7 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Hexo</h1>
+            <h1 id="main-title" class="title">Fecy Note</h1>
         
     </div>
 </header>
@@ -147,8 +147,8 @@
 
     <div class="post-header index">
         <h1 class="title">
-            <a href="/2018/12/17/hello-world/">
-                Hello World
+            <a href="/2018/12/17/hive/mysql-安装/">
+                mysql 安装
             </a>
         </h1>
         <div class="post-info">
@@ -162,15 +162,648 @@
 
     
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <p>1：删除mysql的东西</p>
+<p>[root@master ~]# rpm -e –nodeps mysql<br>1<br>2：安装mysql</p>
+<p>[root@master ~]# yum install -y mysql-server mysql mysql-deve<br>1<br>3：启动mysql</p>
+<p>[root@master ~]# service mysqld start<br>1<br>4：为mysql的root账号设置密码</p>
+<p>[root@master ~]# mysqladmin -u root password ‘123456’<br>1<br>5：使用密码登陆mysql</p>
+<p>[root@master ~]# mysql -uroot -p123456<br>1<br>6：现在你已经可以使用了，但是现在仅限于在本机上使用，如果想要在其他电脑上也能够链接到，可以为其他电脑授予链接权限，下面是给所有电脑链接权限 </p>
+<p><1>登陆到mysql数据库</1></p>
+<pre><code>[root@master ~]# mysql -uroot -p123456
+</code></pre><p>1<br><strong><2>进入到mysql数据库（此mysql是mysql自带的一个数据库，要区分清楚）</2></strong><br>1<br>mysql&gt; use mysql<br>1<br><strong><3>为其他电脑授权链接</3></strong><br>1<br>这个是为单个电脑ip授权的：<br>mysql&gt; GRANT select，insert，update，delete ON <em>.</em> TO root@”172.16.16.152” IDENTIFIED BY “youpassword”;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>    <strong>或者：</strong><br>1<br>为所有IP都赋予连接权限：<br>        mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>7: 自启动（如果你需要电脑启动，mysql就会自己启动可以执行下面的语句，如果不需要就可以不执行，每次启动的时候使用service mysqld start）</p>
+<p>[root@master ~]# chkconfig mysqld on<br>1<br>ps：如果其他电脑还是不能链接上，你要看看防火墙是否关闭 </p>
+<h2 id="可以使用service-iptables-stop"><a href="#可以使用service-iptables-stop" class="headerlink" title="可以使用service iptables stop"></a>可以使用service iptables stop</h2><p>作者：韩利鹏<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045" target="_blank" rel="noopener">https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-案例/">
+                hive 案例
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>一、</p>
+<p>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2”\t”$7”\t”$8”\t”$9 &gt;”day01.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-02””\t”$1”\t”$3”\t”$7”\t”$8”\t”$9 &gt;”day02.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-03””\t”$1”\t”$4”\t”$7”\t”$8”\t”$9 &gt;”day03.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-04””\t”$1”\t”$5”\t”$7”\t”$8”\t”$9 &gt;”day04.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-05””\t”$1”\t”$6”\t”$7”\t”$8”\t”$9 &gt;”day05.csv” } ‘</p>
+<p>二、</p>
+<p> sed -i.bak ‘s#，#\r\n#g’ chinetest.txt</p>
+<p> 三、<br> 建表<br>create table market_sum(<br>product string,<br>price1 double,<br>price2 double,<br>price3 double,<br>price4 double,<br>price5 double,<br>market string,<br>province string,<br>city string<br>) row format delimited<br>fields terminated by “,”;</p>
+<p>读数据<br>load data local inpath’/usr/local/mar/market.csv’ into table market_sum;</p>
+<p>农产品市场个数统计<br>（1）统计每个省份的农产品市场总数 </p>
+<p>select province,count(*)<br>from<br>(select distinct market,province from market_sum ) as m  group by province;</p>
+<p>（2）统计没有农产品市场的省份有哪些 </p>
+<p>1.建省份列表表<br>create table province_table (province string );<br>2.读数据<br>load data local inpath’/usr/local/mar/pro.csv’ into table province_table;<br>3.统计有农产品的省份<br>select distinct province from market_sum;<br>4.统计没有农产品市场的省份</p>
+<p>/<em>使用 not in  适用于单个字段 相同字段</em>/</p>
+<p>select p.province from   province_table  as p<br>where p.province not in (<br>select distinct province from market_sum<br>);</p>
+<p>/<em> 截取前两个字相等 </em>/<br>select p.province from province_table as p<br>left join<br> market_sum as m<br> on substr(p.province,0,2)=substr(m.province,0,2)<br> where m.province is null ;</p>
+<p>（3）统计山东省售卖蛤蜊的农产品市场占全省农产品市场的比例<br>1.山东省 农产品市场</p>
+<p>select m.province, count(*) from<br>(select   market,province  from market_sum where province=”山东”<br> group by market,province) as m<br> group by m.province;</p>
+<p>2.山东省售卖蛤蜊的农产品市场</p>
+<p>select  market,product,province ,count(*)<br>from market_sum<br>where province=”山东” and product=”蛤蜊”<br>group by market,product,province;</p>
+<p>3.求比例<br>select a.c/b.c  from<br>(select product,count(<em>) as c<br>from market_sum<br>where province=”山东” and product=”蛤蜊”<br>group by product,province ) as a<br>,<br>(select m.province, count(</em>) as c  from<br>(select   market,province  from market_sum where province=”山东”<br> group by market,province) as m<br> group by m.province) as b;</p>
+<ol start="4">
+<li>农产品种类统计<br>（1）统计每个省农产品种类总数，找出排名前3的省份</li>
+</ol>
+<p>select province,product,count(1) from market_sum group by province ,product;</p>
+<p>select a.province ,count(*) as c from<br>(select province,product,count(1) from market_sum group by province ,product)<br> as a group by a.province  order by c desc limit 3;</p>
+<p>（2）统计排名前 3 的省份共同拥有的农产品类型</p>
+<p>北京    169<br>江苏    167<br>山东    134</p>
+<p>select a.product from<br>(select  distinct product from market_sum where province=”北京” ) as a  ,<br>(select  distinct product from market_sum where province=”江苏” ) as b  ,<br>(select  distinct product from market_sum where province=”山东” ) as c<br>where a.product=b.product and b.product=c.product<br>;</p>
+<ol start="5">
+<li>价格区间统计 计算山西省的每种农产品的价格波动趋势，即计算每天价格均值。<br>某种农产品的价格均值计算公式： PAVG =(PM1+PM2+…+PMn-max(P)-min(P))/(N-2)<br>其中，P 表示价格，Mn 表示 market，<br>即农产品市场。PM1 表示 M1 农产品市场的该产品 价格，<br>max(P)表示价格最大值，min(P)价格最小值。</li>
+</ol>
+<p>/<em> 有三种以上价格的</em>/<br> select  * from<br> (select a.product ,count(a.price1) as c<br> from<br> (select  price1,product from market_sum<br> where province=”山西”  group by product, price1) as a<br> group by a.product ) as b  where b.c &gt;=3 ;</p>
+<p> /<em> 不足三种价格的</em>/</p>
+<p>  select  b.product from<br> (select a.product ,count(a.price1) as c<br> from<br> (select  price1,product from market_sum<br> where province=”山西”  group by product, price1) as a<br> group by a.product ) as b  where b.c &lt;3 ;</p>
+<p>select  b.product from<br>(select a.product ,count(a.price1) as c<br>from<br>(select  price1,product from market_sum<br>where province=”山西”  group by product, price1) as a<br>group by a.product ) as b  where b.c &lt;3 ;</p>
+<p> /<em> 商品及价格</em>/<br>select  price1,product from market_sum<br>where province=”山西”  group by product, price1;</p>
+<p> select  price1,product from market_sum<br>where province=”山西”  group by product, price1;</p>
+<p> select distinct tmp.product,<br>if(tmp.count &lt;3,<br>if(tmp.count=1,tmp.sum, tmp.sum /2 ),<br>(tmp.sum - tmp.min - tmp.max) / (tmp.count -2)<br>) as result<br>from<br>(select product, price1,<br>min(price1)over(partition by product) as min,<br>max(price1)over(partition by product) as max,<br>sum(price1)over(partition by product) as sum,<br>count(*)over(partition by product) as count<br>from market_sum where province = ‘山西’) as tmp;</p>
+<p>select product,price1,<br>min(price1)over(partition by product) as min,<br>max(price1)over(partition by product) as max,<br>sum(price1)over(partition by product) as sum,<br>count(*)over(partition by product) as count<br>from market_sum where province=’山西’;</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-总结/">
+                hive 总结
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>Hive中的四个by<br>1、order by 对全局数据的一个排序，仅仅有一个reduce（其实他就是对最终结果的一个排序）<br>2、sort by 对每一个reduce内部进行排序，对全局的结果集没有排序<br>set mapreduce.job.reduces=3;</p>
+<pre><code>insert overwrite local directory &apos;/home/xiaoniu/sortby-res&apos; 
+</code></pre><p>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select * from emp sort by empno asc;</p>
+<pre><code>相当于对于每个分区的数据进行排序（也就是每个reduce里面的数据进行了排序）
+</code></pre><p>3、distribute by<br>    分区 partition<br>    类似于MapReduce中分区partition的功能，对数据进行分区的，通常结合sort by进行使用<br>insert overwrite local directory ‘/home/xiaoniu/distby-res’<br>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select <em> from emp distribute by deptno sort by empno asc;<br>    注意事项：<br>        distribute by必须要在sort by 之前<br>4、cluster by<br>    当distribute by和sort by字段相同时，可以使用cluster by<br>    注意被cluster by指定的列只能是降序，不能指定asc和desc<br>insert overwrite local directory ‘/home/xiaoniu/clusterby-res’<br>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select </em> from emp cluster by empno ;</p>
+<p>Hive函数<br>Hive调优<br>1、FetchTack(抓取任务)<br>从配置项的功能是直接抓取数据出来<br>在配置文件中可以设置hive-default.xml.tmplate中<br>     “<property><br>        <name>hive.fetch.task.conversion</name><br>        <value>more</value><br>        <description><br>          Expects one of [none, minimal, more].<br>          Some select queries can be converted to single FETCH task minimizing latency.Currently the query should be single sourced not having any subquery and should not have any aggregations or distincts (which incurs RS), lateral views and joins.</description></property></p>
+<pre><code>    0. none : disable hive.fetch.task.conversion
+   1. minimal : SELECT STAR(*), FILTER on partition columns(分区列的过滤), LIMIT only
+    2. more    : SELECT, FILTER, LIMIT only (support TABLESAMPLE and virtual columns)
+  &lt;/description&gt;
+&lt;/property&gt;&quot;    
+</code></pre><p>set hive.fetch.task.conversion =more;</p>
+<p>2、高级优化<br>    1）大表的拆分，拆成小表<br>        将大表中(字段较多)有用的个别字段拿出来创建成子表,减少数据量<br>        可以创建一张子表通过查询语句</p>
+<pre><code>2）分区表（为了节省查询时间）
+</code></pre><p>一级分区<br>二级分区<br>    3）数据存储格式<br>        textfile格式<br>        orcfile格式<br>        parquet格式<br>4）sql语句的优化<br>比如：调整Join顺序，让多次Join产生的中间数据尽可能小，选择不同的Join策略</p>
+<p>3、参数调优<br>set mapred.max.split.size= 100000000;  // 决定每个map处理的最大的文件大小，单位为B<br>set mapred.min.split.size.per.node= 100000000;  //节点中可以处理的最小的文件大小<br>set mapred.min.split.size.per.rack= 100000000;  // 机架中可以处理的最小的文件大小<br>set hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat;  //执行Map前进行小文件合并</p>
+<p>在开启了org.apache.hadoop.hive.ql.io.CombineHiveInputFormat后，一个data node节点上多个小文件会进行合并，合并文件数由mapred.max.split.size限制的大小决定。<br>mapred.min.split.size.per.node决定了多个data node上的文件是否需要合并~<br>mapred.min.split.size.per.rack决定了多个交换机上的文件是否需要合并~</p>
+<p>set hive.merge.size.per.task = 64000000; //合并文件的大小<br>set hive.merge.smallfiles.avgsize=100000000;  //当输出文件的平均大小小于该值时，启动一个独立的map-reduce任务进行文件merge<br>set hive.exec.reducers.bytes.per.reducer=512000000; //一个job会有多少个reducer来处理，依据的是输入文件的总大小。默认1GB。</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-安装/">
+                hive 安装
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）<br>安装：直接解压一个hive安装包即可<br>此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库<br>此模式不便于让团队成员之间共享协作</p>
+<p>1.1.1. mysql安装<br>yum安装</p>
+<p>①　给root用户授予从任何机器上登陆mysql服务器的权限：<br>mysql&gt; grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘你的密码’ with grant option;<br>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br>注意点：要让mysql可以远程登录访问<br>最直接测试方法：从windows上用Navicat去连接，能连，则可以，不能连，则要去mysql的机器上用命令行客户端进行授权：<br>在mysql的机器上,启动命令行客户端：<br>mysql -uroot -proot<br>mysql&gt;grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root的密码’ with grant option;<br>mysql&gt;flush privileges;</p>
+<p>1.1.2. hive的元数据库配置<br>vi conf/hive-site.xml</p>
+<configuration><property><name>javax.jdo.option.ConnectionURL</name><value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true</value><description>JDBC connect string for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionDriverName</name><value>com.mysql.jdbc.Driver</value><description>Driver class name for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionUserName</name><value>root</value><description>username to use against metastore database</description></property> <property><name>javax.jdo.option.ConnectionPassword</name><value>123456</value><description>password to use against metastore database</description></property></configuration>
+
+<p>2、上传一个mysql的驱动jar包到hive的安装目录的lib中</p>
+<p>3、配置HADOOP_HOME 和HIVE_HOME到系统环境变量中：/etc/profile<br>4、source /etc/profile<br>5、hive启动测试<br>然后用命令启动hive交互界面：<br>[root@hdp20-04 ~]# hive</p>
+<p>设置一些基本参数，让hive使用起来更便捷，比如：<br>1、让提示符显示当前库：<br>hive&gt;set hive.cli.print.current.db=true;<br>2、显示查询结果时显示字段名称：<br>hive&gt;set hive.cli.print.header=true;</p>
+<p>但是这样设置只对当前会话有效，重启hive会话后就失效，解决办法：<br>在linux的当前用户目录中，编辑一个.hiverc文件，将参数写入其中：<br>vi .hiverc<br>set hive.cli.print.header=true;set hive.cli.print.current.db=true;</p>
+<p>1.1. 启动hive服务使用<br>启动hive的服务：<br>[root@hdp20-04 hive-1.2.1]# bin/hiveserver2 -hiveconf hive.root.logger=DEBUG,console</p>
+<p>上述启动，会将这个服务启动在前台，如果要启动在后台，则命令如下：<br>nohup bin/hiveserver2 1&gt;/dev/null 2&gt;&amp;1 &amp;</p>
+<p>启动成功后，可以在别的节点上用beeline去连接<br>v 方式（1）<br>[root@hdp20-04 hive-1.2.1]# bin/beeline  回车，进入beeline的命令界面<br>输入命令连接hiveserver2<br>beeline&gt; !connect jdbc:hive2://fecy-hadoop02:10000<br>（hadoop01是hiveserver2所启动的那台主机名，端口默认是10000）<br>v 方式（2）<br>启动时直接连接：<br>bin/beeline -u jdbc:hive2://mini1:10000 -n root</p>
+<p>接下来就可以做正常sql查询了</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-使用/">
+                hive 使用
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>hive中有一个默认的库：<br>库名： default<br>库目录：hdfs://hdp20-01:9000/user/hive/warehouse</p>
+<p>新建库：<br>create database db_order;<br>库建好后，在hdfs中会生成一个库目录：<br>hdfs://hdp20-01:9000/user/hive/warehouse/db_order.db</p>
+<p>1.1.1. 基本建表语句<br>use db_order;<br>create table t_order(id string,create_time string,amount float,uid string);<br>表建好后，会在所属的库目录中生成一个表目录<br>/user/hive/warehouse/db_order.db/t_order<br>只是，这样建表的话，hive会认为表数据文件中的字段分隔符为 ^A（\001）</p>
+<p>正确的建表语句为：<br>create table t_order(id string,create_time string,amount float,uid string)<br>row format delimited<br>fields terminated by ‘,’;</p>
+<p>这样就指定了，我们的表数据文件中的字段分隔符为 “,”<br>1.1.2. 删除表<br>drop table t_order;<br>删除表的效果是：<br>hive会从元数据库中清除关于这个表的信息；<br>hive还会从hdfs中删除这个表的表目录；</p>
+<p>1.1.3. 内部表与外部表<br>内部表(MANAGED_TABLE)：表目录按照hive的规范来部署，位于hive的仓库目录/user/hive/warehouse中</p>
+<p>外部表(EXTERNAL_TABLE)：表目录由建表用户自己指定<br>create external table t_access(ip string,url string,access_time string)<br>row format delimited<br>fields terminated by ‘,’<br>location ‘/access/log’;<br>外部表和内部表的特性差别：<br>1、内部表的目录在hive的仓库目录中 VS 外部表的目录由用户指定<br>2、drop一个内部表时：hive会清除相关元数据，并删除表数据目录<br>3、drop一个外部表时：hive只会清除相关元数据；</p>
+<p>一个hive的数据仓库，最底层的表，一定是来自于外部系统，为了不影响外部系统的工作逻辑，在hive中可建external表来映射这些外部系统产生的数据目录；<br>然后，后续的etl操作，产生的各种中间表建议用managed_table（内部表）</p>
+<p>1.1.4. 分区表<br>分区表的实质是：在表目录中为数据文件创建分区子目录，以便于在查询时，MR程序可以针对分区子目录中的数据进行处理，缩减读取数据的范围。</p>
+<p>比如，网站每天产生的浏览记录，浏览记录应该建一个表来存放，但是，有时候，我们可能只需要对某一天的浏览记录进行分析<br>这时，就可以将这个表建为分区表，每天的数据导入其中的一个分区；<br>当然，每日的分区目录，应该有一个目录名（分区字段）</p>
+<p>1.1.4.1. 一个分区字段的实例：<br>示例如下：<br>1、创建带分区的表<br>create table t_access(ip string,url string,access_time string)partitioned by(dt string)row format delimitedfields terminated by ‘,’;<br>注意：分区字段不能是表定义中的已存在字段</p>
+<p>2、向分区中导入数据<br>load data local inpath ‘/root/access.log.2017-08-04.log’ into table t_access partition(dt=’20170804’);<br>load data local inpath ‘/root/access.log.2017-08-05.log’ into table t_access partition(dt=’20170805’);</p>
+<p>3、针对分区数据进行查询<br>a、统计8月4号的总PV：<br>select count(*) from t_access where dt=’20170804’;<br>实质：就是将分区字段当成表字段来用，就可以使用where子句指定分区了</p>
+<p>b、统计表中所有数据总的PV：<br>select count(*) from t_access;<br>实质：不指定分区条件即可</p>
+<p>1.1.4.2. 多个分区字段示例<br>建表：<br>create table t_partition(id int,name string,age int)<br>partitioned by(department string,sex string,howold int)<br>row format delimited fields terminated by ‘,’;</p>
+<p>导数据：<br>load data local inpath ‘/root/p1.dat’ into table t_partition partition(department=’xiangsheng’,sex=’male’,howold=20);<br>？？？<br>1.1.5. CTAS建表语法<br>可以通过已存在表来建表：<br>1、create table t_user_2 like t_user;<br>新建的t_user_2表结构定义与源表t_user一致，但是没有数据</p>
+<p>2、在建表的同时插入数据<br>create table t_access_userasselect ip,url from t_access;<br>t_access_user会根据select查询的字段来建表，同时将查询的结果插入新表中</p>
+<p>1.1. 数据导入导出<br>1.1.1. 将数据文件导入hive的表<br>方式1：导入数据的一种方式：<br>手动用hdfs命令，将文件放入表目录；</p>
+<p>方式2：在hive的交互式shell中用hive命令来导入本地数据到表目录<br>hive&gt;load data local inpath ‘/root/order.data.2’ into table t_order;</p>
+<p>方式3：用hive命令导入hdfs中的数据文件到表目录<br>hive&gt;load data inpath ‘/access.log.2017-08-06.log’ into table t_access partition(dt=’20170806’);</p>
+<p>注意：导本地文件和导HDFS文件的区别：<br>本地文件导入表：复制<br>hdfs文件导入表：移动</p>
+<p>1.1.2. 将hive表中的数据导出到指定路径的文件<br>1、将hive表中的数据导入HDFS的文件<br>insert overwrite directory ‘/root/access-data’<br>row format delimited fields terminated by ‘,’<br>select * from t_access;</p>
+<p>2、将hive表中的数据导入本地磁盘文件<br>insert overwrite local directory ‘/root/access-data’<br>row format delimited fields terminated by ‘,’<br>select * from t_access limit 100000;</p>
+<p>1.1.3. hive文件格式<br>HIVE支持很多种文件格式： SEQUENCE FILE | TEXT FILE | PARQUET FILE | RC FILE<br>create table t_pq(movie string,rate int)  stored as textfile;<br>create table t_pq(movie string,rate int)  stored as sequencefile;<br>create table t_pq(movie string,rate int)  stored as parquetfile;</p>
+<p>演示：<br>1、先建一个存储文本文件的表<br>create table t_access_text(ip string,url string,access_time string)<br>row format delimited fields terminated by ‘,’<br>stored as textfile;</p>
+<p>导入文本数据到表中：<br>load data local inpath ‘/root/access-data/000000_0’ into table t_access_text;</p>
+<p>2、建一个存储sequence file文件的表：<br>create table t_access_seq(ip string,url string,access_time string)<br>stored as sequencefile;</p>
+<p>从文本表中查询数据插入sequencefile表中，生成数据文件就是sequencefile格式的了：<br>insert into t_access_seq<br>select * from t_access_text;</p>
+<p>3、建一个存储parquet file文件的表：<br>create table t_access_parq(ip string,url string,access_time string)<br>stored as parquetfile;</p>
+<p>1.2. 数据类型<br>1.2.1. 数字类型<br>TINYINT (1字节整数)<br>SMALLINT (2字节整数)<br>INT/INTEGER (4字节整数)<br>BIGINT (8字节整数)<br>FLOAT (4字节浮点数)<br>DOUBLE (8字节双精度浮点数)</p>
+<p>示例：<br>create table t_test(a string ,b int,c bigint,d float,e double,f tinyint,g smallint)</p>
+<p>1.2.2. 时间类型<br>TIMESTAMP (时间戳) (包含年月日时分秒的一种封装)<br>DATE (日期)（只包含年月日）<br>示例，假如有以下数据文件：<br>1,zhangsan,1985-06-302,lisi,1986-07-103,wangwu,1985-08-09<br>那么，就可以建一个表来对数据进行映射<br>create table t_customer(id int,name string,birthday date)<br>row format delimited fields terminated by ‘,’;<br>然后导入数据<br>load data local inpath ‘/root/customer.dat’ into table t_customer;<br>然后，就可以正确查询</p>
+<p>1.2.3. 字符串类型<br>STRING<br>VARCHAR (字符串1-65355长度，超长截断)<br>CHAR (字符串，最大长度255)</p>
+<p>1.2.4. 其他类型<br>BOOLEAN（布尔类型）：true  false<br>BINARY (二进制)：</p>
+<p>1.2.5. 复合类型<br>1.2.5.1. array数组类型<br>arrays: ARRAY&lt;data_type&gt; )</p>
+<p>示例：array类型的应用<br>假如有如下数据需要用hive的表去映射：<br>战狼2,吴京:吴刚:龙母,2017-08-16三生三世十里桃花,刘亦菲:痒痒,2017-08-20<br>设想：如果主演信息用一个数组来映射比较方便</p>
+<p>建表：<br>create table t_movie(moive_name string,actors array<string>,first_show date)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;<br>导入数据：<br>load data local inpath ‘/root/movie.dat’ into table t_movie;</string></p>
+<p>查询：<br>select * from t_movie;<br>select moive_name,actors[0] from t_movie;<br>select moive_name,actors from t_movie where array_contains(actors,’吴刚’);<br>select moive_name,size(actors) from t_movie;<br>1.2.5.2. map类型<br>maps: MAP&lt;primitive_type, data_type&gt; </p>
+<p>1) 假如有以下数据：<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,282,lisi,father:mayun#mother:huangyi#brother:guanyu,223,wangwu,father:wangjianlin#mother:ruhua#sister:jingtian,294,mayun,father:mayongzhen#mother:angelababy,26<br>可以用一个map类型来对上述数据中的家庭成员进行描述</p>
+<p>2) 建表语句：<br>create table t_person(id int,name string,family_members map&lt;string,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>3) 查询<br>select * from t_person;</p>
+<h2 id="取map字段的指定key的值"><a href="#取map字段的指定key的值" class="headerlink" title="取map字段的指定key的值"></a>取map字段的指定key的值</h2><p>select id,name,family_members[‘father’] as father from t_person;</p>
+<h2 id="取map字段的所有key"><a href="#取map字段的所有key" class="headerlink" title="取map字段的所有key"></a>取map字段的所有key</h2><p>select id,name,map_keys(family_members) as relation from t_person;</p>
+<h2 id="取map字段的所有value"><a href="#取map字段的所有value" class="headerlink" title="取map字段的所有value"></a>取map字段的所有value</h2><p>select id,name,map_values(family_members) from t_person;<br>select id,name,map_values(family_members)[0] from t_person;</p>
+<h2 id="综合：查询有brother的用户信息"><a href="#综合：查询有brother的用户信息" class="headerlink" title="综合：查询有brother的用户信息"></a>综合：查询有brother的用户信息</h2><p>select id,name,fatherfrom(select id,name,family_members[‘brother’] as father from t_person) tmpwhere father is not null;</p>
+<p>1.2.5.3. struct类型<br>structs: STRUCT&lt;col_name : data_type, …&gt;</p>
+<p>1) 假如有如下数据：<br>1,zhangsan,18:male:beijing2,lisi,28:female:shanghai</p>
+<p>其中的用户信息包含：年龄：整数，性别：字符串，地址：字符串<br>设想用一个字段来描述整个用户信息，可以采用struct</p>
+<p>2) 建表：<br>create table t_person_struct(id int,name string,info struct<a href="age:int,sex:string,addr:string" target="_blank" rel="noopener">age:int,sex:string,addr:string</a>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</p>
+<p>3) 查询<br>select * from t_person_struct;<br>select id,name,info.age from t_person_struct;</p>
+<p>1.3. 修改表定义<br>仅修改Hive元数据，不会触动表中的数据，用户需要确定实际的数据布局符合元数据的定义。</p>
+<p>修改表名：<br>ALTER TABLE table_name RENAME TO new_table_name</p>
+<p>示例：alter table t_1 rename to t_x;</p>
+<p>修改分区名：<br>alter table t_partition partition(department=’xiangsheng’,sex=’male’,howold=20) rename to partition(department=’1’,sex=’1’,howold=20);</p>
+<p>添加分区：<br>alter table t_partition add partition (department=’2’,sex=’0’,howold=40);</p>
+<p>删除分区：<br>alter table t_partition drop partition (department=’2’,sex=’2’,howold=24);</p>
+<p>修改表的文件格式定义：<br>ALTER TABLE table_name [PARTITION partitionSpec] SET FILEFORMAT file_format</p>
+<p>alter table t_partition partition(department=’2’,sex=’0’,howold=40 ) set fileformat sequencefile;</p>
+<p>修改列名定义：<br>ALTER TABLE table_name CHANGE [COLUMN] col_old_name col_new_name column_type [COMMENTcol_comment] [FIRST|(AFTER column_name)]  </p>
+<p>alter table t_user change price jiage float first;</p>
+<p>增加/替换列：<br>ALTER TABLE table_name ADD|REPLACE COLUMNS (col_name data_type[COMMENT col_comment], …)  </p>
+<p>alter table t_user add columns (sex string,addr string);<br>alter table t_user replace columns (id string,age int,price float);</p>
+<ol>
+<li>hive查询语法<br>sql是一门面向集合的编程语言；<br>单行方法<br>public string lower(String word){<br>return word.getlower()<br>}<br>——-lower(name)———</li>
+</ol>
+<hr>
+<p>提交hive的时候时间需要同步<br>yum install -y ntp<br>ntpdate 0.asia.pool.ntp.org</p>
+<p>提示：在做小数据量查询测试时，可以让hive将mrjob提交给本地运行器运行，可以在hive会话中设置如下参数：<br>hive&gt; set hive.exec.mode.local.auto=true;<br>1.1. 基本查询示例<br>select <em> from t_access;<br>select count(</em>) from t_access;<br>select max(ip) from t_access;<br>1.2. 条件查询<br>select <em> from t_access where access_time&lt;’2017-08-06 15:30:20’<br>select </em> from t_access where access_time&lt;’2017-08-06 16:30:20’ and ip&gt;’192.168.33.3’;<br>1.3. join关联查询示例<br>假如有a.txt文件<br>a,1b,2c,3d,4</p>
+<p>假如有b.txt文件<br>a,xxb,yyd,zze,pp</p>
+<p>进行各种join查询：<br>1、inner join（join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a ajoin t_b bon a.name=b.name</p>
+<p>结果：<br>+——–+——–+——–+——–+–+| aname  | anumb  | bname  | bnick  |+——–+——–+——–+——–+–+| a      | 1      | a      | xx     || b      | 2      | b      | yy     || d      | 4      | d      | zz     |+——–+——–+——–+——–+–+</p>
+<p>2、left outer join（left join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a aleft outer join t_b bon a.name=b.name</p>
+<p>结果：</p>
+<p>3、right outer join（right join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a aright outer join t_b bon a.name=b.name</p>
+<p>结果：</p>
+<p>4、full outer join（full join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a afull join t_b bon a.name=b.name;</p>
+<p>结果：</p>
+<p>1.4. left semi join<br>Left semi join ：相当于join连接两个表后产生的数据中的左半部分<br>hive中不支持exist/IN子查询，可以用left semi join来实现同样的效果：<br>selecta.name as aname,a.numb as anumbfrom t_a aleft semi join t_b bon a.name=b.name;</p>
+<p>结果：</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-笔记/">
+                hive 笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>注：mr需要时间同步<br>安装hive（jdk，hadoop）<br>一：建表<br>create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;<br>二：删除表<br>drop table tablename;<br>三：内部表跟外部表<br>    内部表（一创建的形式，存储的数据在/user/hive/warehouse下面）<br>    外部表（关联一个已经存在的文件夹（HDFS上））<br>    删除的时候：内部表删除表的时候会把数据一并删除，外部表的时候只会删除关联数据<br>create external table t_user (id String,name String) row format delimited fields terminated by ‘ ‘ location ‘/hive/t_user’;<br>四：分区表(分区的字段，不能出现在字段里面)<br>create table t_partition(id String,name String) partitioned by(dt String) row format delimited fields terminated by ‘ ‘;<br>加载数据：load data local inpath ‘/root/user.txt’ into table t_partition partition(dt=”2018-11-01”);</p>
+<p>五：数据导入（hadoop fs -put …..）<br>    hdfs中导入 load data inpath ‘/hive/t_user/user.txt’ into table t_user;<br>    从linux文件系统里面进行导入数据  load data local inpath ‘/root/t_person.txt’ into table t_person;<br>六：导出数据(hadoop fs -get ……)<br>    insert overwrite directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select <em> from t_user;<br>    insert overwrite local directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select </em> from t_user;<br>七：文件存储格式<br>    默认存储textfile<br>    stored as textfile;</p>
+<p>基本的数据类型 int string boolean …<br>array类型<br>战狼2,吴京:吴刚:龙母,2017-08-16<br>三生三世十里桃花,刘亦菲:痒痒,2017-08-20</p>
+<p>create table t_movie(movie_name string,actors array<string>,dt date)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</string></p>
+<p>select actors[0] from t_movie;<br>select <em> from t_movie where movie_name=”战狼2”;<br>select </em> from t_movie where array_contains(actors,”吴京”);<br>select movie_name,size(actors) from t_movie;</p>
+<p>map类型<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,28<br>2,lisi,father:mayun#mother:huangyi#brother:guanyu,22<br>create table t_person(id int,name string,family_members map&lt;String,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>通过key获取value<br>select name,family_members[‘father’] from t_person;</p>
+<p>获取所有的key<br>select name,map_keys(family_members) from t_person;</p>
+<p>获取所有的value<br>select name,map_values(family_members) from t_person;</p>
+<p>structs（javabean）类型<br>1,zhangsan,18:male:beijing<br>2,lisi,28:female:shanghai</p>
+<p>create table t_person_structs(id int,name string,struct_info struct<a href="age:int,sex:string,addr:string" target="_blank" rel="noopener">age:int,sex:string,addr:string</a>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;<br>load data local inpath ‘/root/t_person_struct.txt’ into table t_person_structs;</p>
+<p>select name,struct_info.age from t_person_structs;<br> 使用本地模式进行运算<br> set hive.exec.mode.local.auto=true;</p>
+<p>join</p>
+<p>a,1<br>b,2<br>c,3<br>d,4</p>
+<p>a,xx<br>b,yy<br>d,zz<br>e,pp</p>
+<p>drop table t_a;<br>drop table t_b;<br>create table t_a(name string,age int) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/a.txt’ into table t_a;</p>
+<p>create table t_b(name string,nickname string) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/b.txt’ into table t_b;<br>内连接<br>select * from t_a a join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| d       | 4      | d       | zz          |<br>+———+——–+———+————-+–+</p>
+<p>左外连接<br>select * from t_a a left join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| c       | 3      | NULL    | NULL        |<br>| d       | 4      | d       | zz          |<br>+———+——–+———+————-+–+</p>
+<p>右外连接<br>select * from t_a a right join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| d       | 4      | d       | zz          |<br>| NULL    | NULL   | e       | pp          |<br>+———+——–+———+————-+–+</p>
+<p>全外连接 full outer join<br>select * from t_a a full outer join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| c       | 3      | NULL    | NULL        |<br>| d       | 4      | d       | zz          |<br>| NULL    | NULL   | e       | pp          |<br>+———+——–+———+————-+–+</p>
+<p>semi join(左表数据   注：select 不能出现右表字段)<br>select * from t_a a left semi join t_b b on a.name=b.name;<br>+———+——–+–+<br>| a.name  | a.age  |<br>+———+——–+–+<br>| a       | 1      |<br>| b       | 2      |<br>| d       | 4      |<br>+———+——–+–+</p>
+<p>————————————————-第二天————————–<br><a href="https://cloud.tencent.com/developer/article/1120640" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1120640</a></p>
+<p>20170804,192.168.33.66,<a href="http://www.edu360.cn/job" target="_blank" rel="noopener">http://www.edu360.cn/job</a><br>group by</p>
+<p>create table t_access(dt string,ip string,url string) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/access.txt’ into table t_access;<br>select dt,count(1) c from t_access where 1=1 group by dt,ip having c&gt;1;</p>
+<p>注：select 只能出现group by后面的字段    其他的字段只能出现在聚合函数中<br>    having  聚合之后的过滤   （where 只能过滤分组之前的数据）</p>
+<p>子查询<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,28</p>
+<p>create table t_person(id string,username string,family map&lt;string,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>load data local inpath ‘/root/person.txt’ into table t_person;<br>– 查询有兄弟的人</p>
+<p>select * from<br>(select username,family[‘brother’] as brother from t_person) tmp<br>where brother is not null;</p>
+<p>select username,family[‘brother’],age from t_person where array_contains(map_keys(family),’brother’);</p>
+<p>排序：order by 字段         降序的得手在字段后面加上desc<br>select username,family[‘brother’],age from t_person where array_contains(map_keys(family),’brother’) order by age;</p>
+<p>条件控制语句<br>年龄<br>select username,<br>case<br>    when age<20 then="" 'young'="" when="" age="">19 and age&lt;25  then ‘moddle’<br>    else ‘old’<br>end<br>as chenghu<br>from t_person;</20></p>
+<p>if     if(条件语句,”成立时候返回的结果”,”不成立的时候返回的结果”)<br>select username,if(age&gt;20,”old”,’young’) from t_person;</p>
+<p>行列转换   explode(Array())<br>化学<br>物理<br>数学<br>语文<br>化学<br>数学<br>语文<br>select explode (array(1,2,3,4));<br>1,zhangsan,化学:物理:数学:语文</p>
+<p>create table t_subject(id string,username string,subject array<string>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</string></p>
+<p>load data local inpath ‘/root/subject.txt’ into table t_subject;</p>
+<p>都有哪些科目<br>select distinct(tmp.sub) from<br>(select explode(subject) as sub from t_subject) tmp;</p>
+<p>表生成函数(将数组生成每列的数据)<br>select id,username,tmp.sub from t_subject lateral view explode(subject) tmp as sub;</p>
+<p>json解析<br>create table t_json(json String);<br>load data local inpath ‘/root/rating.json’ into table t_json;<br>把生成的数据导入到一张表里面<br>create table t_rate<br>as<br>select json_tuple(json,’movie’,’rate’,’timeStamp’,’uid’) as (movieid,rate,timeS,ui) from t_json;</p>
+<p>分组topn<br>1,18,a,male</p>
+<p>create table t_topn(id string,age int,name string,sex string)<br>row format delimited fields terminated by ‘,’<br>;</p>
+<p>load data local inpath ‘/root/topn.txt’ into table t_topn;<br>select * from<br>(select id,age,name,sex,row_number() over(partition by sex order by age desc) as rank from t_topn) as tmp<br>where rank &lt;3<br>;</p>
+<p>select sex s from t_topn group by sex;</p>
+<p>用户    月份    月总额    累计到当月的总额<br>每个用户的销售金额累计（按月）<br>A    2015-01    33    33<br>A    2015-02    10    43<br>A    2015-03    30    73<br>B    2015-01    30    30<br>B    2015-02    15    45</p>
+<p>销售记录报表生成<br>A,2015-01-08,5<br>A,2015-01-11,15<br>B,2015-01-12,5<br>A,2015-01-12,8</p>
+<p>drop table t_sale;<br>create table t_sale(username string,dt string,money int)<br>row format delimited fields terminated by ‘,’;</p>
+<p>load data local inpath ‘/root/sale.txt’ into table t_sale;<br>– 计算出每个月的销售金额<br>select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7);</p>
+<p>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |<br>| A         | 2015-02  | 10   |<br>| A         | 2015-03  | 20   |<br>| B         | 2015-01  | 30   |<br>| B         | 2015-02  | 15   |<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+</p>
+<p>– 自关联（）<br>select * from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username;</p>
+<p>+————–+———-+—————-+————–+———-+—————-+–+<br>| t1.username  |  t1.yue  | t1.month_sale  | t2.username  |  t2.yue  | t2.month_sale  |<br>+————–+———-+—————-+————–+———-+—————-+–+<br>| A            | 2015-01  | 33             | A            | 2015-01  | 33             |</p>
+<p>| A            | 2015-02  | 10             | A            | 2015-01  | 33             |<br>| A            | 2015-02  | 10             | A            | 2015-02  | 10             |</p>
+<p>| A            | 2015-03  | 20             | A            | 2015-01  | 33             |<br>| A            | 2015-03  | 20             | A            | 2015-02  | 10             |<br>| A            | 2015-03  | 20             | A            | 2015-03  | 20             |</p>
+<p>| B            | 2015-01  | 30             | B            | 2015-01  | 30             |<br>| B            | 2015-01  | 30             | B            | 2015-02  | 15             |<br>| B            | 2015-01  | 30             | B            | 2015-03  | 45             |<br>| B            | 2015-02  | 15             | B            | 2015-01  | 30             |<br>| B            | 2015-02  | 15             | B            | 2015-02  | 15             |<br>| B            | 2015-02  | 15             | B            | 2015-03  | 45             |<br>| B            | 2015-03  | 45             | B            | 2015-01  | 30             |<br>| B            | 2015-03  | 45             | B            | 2015-02  | 15             |<br>| B            | 2015-03  | 45             | B            | 2015-03  | 45             |<br>| C            | 2015-01  | 60             | C            | 2015-01  | 60             |<br>| C            | 2015-01  | 60             | C            | 2015-02  | 10             |<br>| C            | 2015-01  | 60             | C            | 2015-03  | 30             |<br>| C            | 2015-02  | 10             | C            | 2015-01  | 60             |<br>| C            | 2015-02  | 10             | C            | 2015-02  | 10             |<br>| C            | 2015-02  | 10             | C            | 2015-03  | 30             |<br>| C            | 2015-03  | 30             | C            | 2015-01  | 60             |<br>| C            | 2015-03  | 30             | C            | 2015-02  | 10             |<br>| C            | 2015-03  | 30             | C            | 2015-03  | 30             |<br>+————–+———-+—————-+————–+———-+—————-+–+<br>select t1.username,t1.yue,t1.month_sale,t2.month_sale from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username<br>where t1.yue&gt;=t2.yue;<br>+————–+———-+—————-+—————-+–+<br>| t1.username  |  t1.yue  | t1.month_sale  | t2.month_sale  |<br>+————–+———-+—————-+—————-+–+<br>| A            | 2015-01  | 33             | 33             |</p>
+<p>| A            | 2015-02  | 10             | 33             |<br>| A            | 2015-02  | 10             | 10             |</p>
+<p>| A            | 2015-03  | 20             | 33             |<br>| A            | 2015-03  | 20             | 10             |<br>| A            | 2015-03  | 20             | 20             |</p>
+<p>| B            | 2015-01  | 30             | 30             |<br>| B            | 2015-02  | 15             | 30             |<br>| B            | 2015-02  | 15             | 15             |<br>| B            | 2015-03  | 45             | 30             |<br>| B            | 2015-03  | 45             | 15             |<br>| B            | 2015-03  | 45             | 45             |<br>| C            | 2015-01  | 60             | 60             |<br>| C            | 2015-02  | 10             | 60             |<br>| C            | 2015-02  | 10             | 10             |<br>| C            | 2015-03  | 30             | 60             |<br>| C            | 2015-03  | 30             | 10             |<br>| C            | 2015-03  | 30             | 30             |<br>+————–+———-+—————-+—————-+–+</p>
+<p>select t1.username,t1.yue,t1.month_sale,sum(t2.month_sale) from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username<br>where t1.yue&gt;=t2.yue<br>group by t1.username,t1.yue,t1.month_sale;<br>+————–+———-+——+–+<br>| t1.username  |  t1.yue  | _c2  |<br>+————–+———-+——+–+<br>| A            | 2015-01  | 33   |<br>| A            | 2015-02  | 43   |<br>| A            | 2015-03  | 63   |<br>| B            | 2015-01  | 30   |<br>| B            | 2015-02  | 45   |<br>| B            | 2015-03  | 90   |<br>| C            | 2015-01  | 60   |<br>| C            | 2015-02  | 70   |<br>| C            | 2015-03  | 100  |<br>+————–+———-+——+–+</p>
+<p>– 使用窗口函数做累计报表<br>– 计算出每个月的销售金额<br>select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7);<br>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |   33<br>| A         | 2015-02  | 10   |   33+10<br>| A         | 2015-03  | 20   |   33+10+20<br>| B         | 2015-01  | 30   |   30<br>| B         | 2015-02  | 15   |<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+<br>select tmp.username,tmp.yue,tmp.month_sale,<br>sum(tmp.month_sale) over(partition by tmp.username order by tmp.yue)<br>from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) as tmp;</p>
+<p>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |   1<br>| A         | 2015-01  | 33   |   2<br>| A         | 2015-02  | 10   |   3<br>| A         | 2015-03  | 20   |   4<br>| B         | 2015-01  | 30   |   1<br>| B         | 2015-02  | 15   |   2<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+</p>
+<p>wc<br>create table t_wc(line string);<br>load data local inpath ‘/root/wc.txt’ into table t_wc;</p>
+<p>select word,count(1) cont from<br>(select explode(split(line,’ ‘)) as word from t_wc) tmp<br>group by word<br>order by cont desc;</p>
+<p>连续销售记录<br>create table t_shop_sale(username string,dt string,money int)<br>row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/shop.txt’ into table t_shop_sale;</p>
+<p>– 根据username分组，根据时间排序 打编号<br>select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale;</p>
+<p>select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp;</p>
+<p>select username,count(1) as cnt from<br>(select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp1) tmp2<br>group by username,flag;</p>
+<p>select distinct(username) from<br>(select username,count(1) as cnt from<br>(select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp1) tmp2<br>group by username,flag) tmp3<br>where cnt&gt;=3;</p>
+<p>A,2017-10-11,300 1 2017-10-10<br>A,2017-10-12,200 2 2017-10-10<br>A,2017-10-13,100 3 2017-10-10<br>A,2017-10-15,100 4 2017-10-11<br>A,2017-10-16,300 5<br>A,2017-10-17,150 6<br>A,2017-10-18,340 7<br>A,2017-10-19,360 8</p>
+<p>B,2017-10-11,400 1<br>B,2017-10-12,200 2<br>B,2017-10-15,600 3</p>
+<p>C,2017-10-11,350<br>C,2017-10-13,250<br>C,2017-10-14,300<br>C,2017-10-15,400<br>C,2017-10-16,200</p>
+<p>D,2017-10-13,500<br>D,2017-10-14,600</p>
+<p>E,2017-10-14,600<br>E,2017-10-15,500</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-函数大全/">
+                hive Hive函数大全
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>Hive函数大全</p>
+<p>一、关系运算：</p>
+<ol>
+<li>等值比较: =<pre><code>语法：A=B
+操作类型：所有基本类型
+描述:如果表达式A与表达式B相等，则为TRUE；否则为FALSE
+举例：
+Hive&gt;select 1 from lxw_dual where 1=1;
+1
+</code></pre></li>
+<li><p>不等值比较: &lt;&gt;</p>
+<pre><code>语法: A &lt;&gt; B
+</code></pre><p> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A与表达式B不相等，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt;&gt; 2;<br> 1<br>3.小于比较: &lt;</p>
+<pre><code>语法: A &lt; B
+</code></pre><p> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A小于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt; 2;<br> 1</p>
+</li>
+<li><p>小于等于比较: &lt;=<br> 语法: A &lt;= B<br> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A小于或者等于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt;= 1;<br> 1</p>
+</li>
+<li><p>大于比较: &gt;<br> 语法: A &gt; B<br> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A大于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 2 &gt; 1;<br> 1</p>
+</li>
+<li><p>大于等于比较: &gt;=<br> 语法: A &gt;= B<br> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A大于或者等于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &gt;= 1;<br> 1</p>
+<p> 注意：String的比较要注意(常用的时间比较可以先to_date之后再比较)<br> hive&gt; select* from lxw_dual;<br> 201111120900:00:00    2011111209</p>
+<p> hive&gt; selecta,b,a&lt;b,a&gt;b,a=b from lxw_dual;<br> 201111120900:00:00    2011111209      false   true    false</p>
+</li>
+<li><p>空值判断: IS NULL<br> 语法: A IS NULL<br> 操作类型:所有类型<br> 描述:如果表达式A的值为NULL，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where null is null;<br> 1</p>
+</li>
+<li><p>非空判断: IS NOT NULL<br> 语法: A IS NOT NULL<br> 操作类型:所有类型<br> 描述:如果表达式A的值为NULL，则为FALSE；否则为TRUE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 is not null;<br> 1</p>
+</li>
+<li><p>LIKE比较: LIKE<br> 语法: A LIKE B<br> 操作类型: strings<br>描述:如果字符串A或者字符串B为NULL，则返回NULL；如果字符串A符合表达式B  的正则语法，则为TRUE；否则为FALSE。B中字符”_”表示任意单个字符，而字符”%”表示任意数量的字符。<br> 举例：<br> hive&gt; select1 from lxw_dual where ‘football’ like ‘foot%’;<br> 1<br> hive&gt; select1 from lxw_dual where ‘football’ like ‘foot____’;<br> 1<br> 注意：否定比较时候用NOT ALIKE B<br> hive&gt; select1 from lxw_dual where NOT ‘football’ like ‘fff%’;<br> 1</p>
+</li>
+<li><p>JAVA的LIKE操作: RLIKE<br>语法: A RLIKE B<br>操作类型: strings<br>描述:如果字符串A或者字符串B为NULL，则返回NULL；如果字符串A符合Java正则表达式B的正则语法，则为TRUE；否则为FALSE。<br>举例：<br>hive&gt; select1 from lxw_dual where ‘footbar’ rlike ‘^f.*r$’;<br>1<br>注意：判断一个字符串是否全为数字：<br>hive&gt;select 1from lxw_dual where ‘123456’ rlike ‘^\d+$’;<br>1<br>hive&gt; select1 from lxw_dual where ‘123456aa’ rlike ‘^\d+$’;</p>
+</li>
+<li><p>REGEXP操作: REGEXP<br>语法: A REGEXP B<br>操作类型: strings<br>描述:功能与RLIKE相同<br>举例：<br>hive&gt; select1 from lxw_dual where ‘footbar’ REGEXP ‘^f.*r$’;<br>1<br>二、数学运算：</p>
+</li>
+<li><p>加法操作: +<br> 语法: A + B<br> 操作类型：所有数值类型<br> 说明：返回A与B相加的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。比如，int + int 一般结果为int类型，而int + double一般结果为double类型<br> 举例：<br> hive&gt; select1 + 9 from lxw_dual;<br> 10<br> hive&gt; createtable lxw_dual as select 1 + 1.2 from lxw_dual;<br> hive&gt; describelxw_dual;<br> _c0     double</p>
+</li>
+<li><p>减法操作: -<br> 语法: A– B<br> 操作类型：所有数值类型<br> 说明：返回A与B相减的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。比如，int– int 一般结果为int类型，而int– double 一般结果为double类型<br> 举例：<br> hive&gt; select10 – 5 from lxw_dual;<br> 5<br> hive&gt; createtable lxw_dual as select 5.6 – 4 from lxw_dual;<br> hive&gt;describe lxw_dual;<br> _c0     double</p>
+</li>
+<li><p>乘法操作: <em><br> 语法: A </em> B<br> 操作类型：所有数值类型<br> 说明：返回A与B相乘的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。注意，如果A乘以B的结果超过默认结果类型的数值范围，则需要通过cast将结果转换成范围更大的数值类型<br> 举例：<br> hive&gt; select40 * 5 from lxw_dual;<br> 200</p>
+</li>
+<li><p>除法操作: /<br> 语法: A / B<br> 操作类型：所有数值类型<br> 说明：返回A除以B的结果。结果的数值类型为double<br> 举例：<br> hive&gt; select40 / 5 from lxw_dual;<br> 8.0</p>
+</li>
+</ol>
+<p>注意：hive中最高精度的数据类型是double,只精确到小数点后16位，在做除法运算的时候要特别注意<br>hive&gt;select ceil(28.0/6.999999999999999999999) from lxw_duallimit 1;<br>结果为4<br>hive&gt;select ceil(28.0/6.99999999999999) from lxw_dual limit1;<br>结果为5</p>
+<ol start="5">
+<li>取余操作: %<br>语法: A % B<br>操作类型：所有数值类型<br>说明：返回A除以B的余数。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。<br>举例：<br>hive&gt; select 41 % 5 from lxw_dual;<br>1<br>hive&gt; select 8.4 % 4 from lxw_dual;<br>0.40000000000000036<br>注意：精度在hive中是个很大的问题，类似这样的操作最好通过round指定精度<br>hive&gt; select round(8.4 % 4 , 2) from lxw_dual;<br>0.4</li>
+<li><p>位与操作: &amp;<br>语法: A &amp; B<br>操作类型：所有数值类型<br>说明：返回A和B按位进行与操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。<br>举例：<br>hive&gt; select 4 &amp; 8 from lxw_dual;<br>0<br>hive&gt; select 6 &amp; 4 from lxw_dual;<br>4</p>
+</li>
+<li><p>位或操作: |<br>语法: A | B<br>操作类型：所有数值类型<br>说明：返回A和B按位进行或操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。<br>举例：<br>hive&gt; select 4 | 8 from lxw_dual;<br>12<br>hive&gt; select 6 | 8 from lxw_dual;<br>14</p>
+</li>
+<li><p>位异或操作: ^<br>语法: A ^ B<br>操作类型：所有数值类型<br>说明：返回A和B按位进行异或操作的结果。结果的数值类型等于A的类型和B的类型的最小父类型（详见数据类型的继承关系）。<br>举例：<br>hive&gt; select 4 ^ 8 from lxw_dual;<br>12<br>hive&gt; select 6 ^ 4 from lxw_dual;<br>2</p>
+</li>
+</ol>
+<p>9．位取反操作: ~<br>语法: ~A<br>操作类型：所有数值类型<br>说明：返回A按位取反操作的结果。结果的数值类型等于A的类型。<br>举例：<br>hive&gt; select ~6 from lxw_dual;<br>-7<br>hive&gt; select ~4 from lxw_dual;<br>-5<br>三、逻辑运算：</p>
+<ol>
+<li><p>逻辑与操作: AND<br>语法: A AND B<br>操作类型：boolean<br>说明：如果A和B均为TRUE，则为TRUE；否则为FALSE。如果A为NULL或B为NULL，则为NULL<br>举例：<br>hive&gt; select 1 from lxw_dual where 1=1 and 2=2;<br>1</p>
+</li>
+<li><p>逻辑或操作: OR<br>语法: A OR B<br>操作类型：boolean<br>说明：如果A为TRUE，或者B为TRUE，或者A和B均为TRUE，则为TRUE；否则为FALSE<br>举例：<br>hive&gt; select 1 from lxw_dual where 1=2 or 2=2;<br>1</p>
+</li>
+<li><p>逻辑非操作: NOT<br>语法: NOT A<br>操作类型：boolean<br>说明：如果A为FALSE，或者A为NULL，则为TRUE；否则为FALSE<br>举例：<br>hive&gt; select 1 from lxw_dual where not 1=2;<br>1</p>
+</li>
+</ol>
+<p>四、数值计算</p>
+<ol>
+<li><p>取整函数: round<br>语法: round(double a)<br>返回值: BIGINT<br>说明:返回double类型的整数值部分（遵循四舍五入）<br>举例：<br>hive&gt; select round(3.1415926) from lxw_dual;<br>3<br>hive&gt; select round(3.5) from lxw_dual;<br>4<br>hive&gt; create table lxw_dual as select round(9542.158) fromlxw_dual;<br>hive&gt; describe lxw_dual;<br>_c0     bigint</p>
+</li>
+<li><p>指定精度取整函数: round<br>语法: round(double a, int d)<br>返回值: DOUBLE<br>说明:返回指定精度d的double类型<br>举例：<br>hive&gt; select round(3.1415926,4) from lxw_dual;<br>3.1416</p>
+</li>
+<li><p>向下取整函数: floor<br>语法: floor(double a)<br>返回值: BIGINT<br>说明:返回等于或者小于该double变量的最大的整数<br>举例：<br>hive&gt; select floor(3.1415926) from lxw_dual;<br>3<br>hive&gt; select floor(25) from lxw_dual;<br>25</p>
+</li>
+<li><p>向上取整函数: ceil<br>语法: ceil(double a)<br>返回值: BIGINT<br>说明:返回等于或者大于该double变量的最小的整数<br>举例：<br>hive&gt; select ceil(3.1415926) from lxw_dual;<br>4<br>hive&gt; select ceil(46) from lxw_dual;<br>46</p>
+</li>
+<li><p>向上取整函数: ceiling<br>语法: ceiling(double a)<br>返回值: BIGINT<br>说明:与ceil功能相同<br>举例：<br>hive&gt; select ceiling(3.1415926) from lxw_dual;<br>4<br>hive&gt; select ceiling(46) from lxw_dual;<br>46</p>
+</li>
+<li><p>取随机数函数: rand<br>语法: rand(),rand(int seed)<br>返回值: double<br>说明:返回一个0到1范围内的随机数。如果指定种子seed，则会等到一个稳定的随机数序列<br>举例：<br>hive&gt; select rand() from lxw_dual;<br>0.5577432776034763<br>hive&gt; select rand() from lxw_dual;<br>0.6638336467363424<br>hive&gt; select rand(100) from lxw_dual;<br>0.7220096548596434<br>hive&gt; select rand(100) from lxw_dual;<br>0.7220096548596434</p>
+</li>
+<li><p>自然指数函数: exp<br>语法: exp(double a)<br>返回值: double<br>说明:返回自然对数e的a次方<br>举例：<br>hive&gt; select exp(2) from lxw_dual;<br>7.38905609893065<br>自然对数函数: ln<br>语法: ln(double a)<br>返回值: double<br>说明:返回a的自然对数<br>举例：<br>hive&gt; select ln(7.38905609893065) from lxw_dual;<br>2.0</p>
+</li>
+<li><p>以10为底对数函数: log10<br>语法: log10(double a)<br>返回值: double<br>说明:返回以10为底的a的对数<br>举例：<br>hive&gt; select log10(100) from lxw_dual;<br>2.0</p>
+</li>
+<li><p>以2为底对数函数: log2<br>语法: log2(double a)<br>返回值: double<br>说明:返回以2为底的a的对数<br>举例：<br>hive&gt; select log2(8) from lxw_dual;<br>3.0</p>
+</li>
+<li><p>对数函数: log<br>语法: log(double base, double a)<br>返回值: double<br>说明:返回以base为底的a的对数<br>举例：<br>hive&gt; select log(4,256) from lxw_dual;<br>4.0</p>
+</li>
+<li><p>幂运算函数: pow<br>语法: pow(double a, double p)<br>返回值: double<br>说明:返回a的p次幂<br>举例：<br>hive&gt; select pow(2,4) from lxw_dual;<br>16.0</p>
+</li>
+<li><p>幂运算函数: power<br>语法: power(double a, double p)<br>返回值: double<br>说明:返回a的p次幂,与pow功能相同<br>举例：<br>hive&gt; select power(2,4) from lxw_dual;<br>16.0</p>
+</li>
+<li><p>开平方函数: sqrt<br>语法: sqrt(double a)<br>返回值: double<br>说明:返回a的平方根<br>举例：<br>hive&gt; select sqrt(16) from lxw_dual;<br>4.0</p>
+</li>
+<li><p>二进制函数: bin<br>语法: bin(BIGINT a)<br>返回值: string<br>说明:返回a的二进制代码表示<br>举例：<br>hive&gt; select bin(7) from lxw_dual;<br>111</p>
+</li>
+<li><p>十六进制函数: hex<br>语法: hex(BIGINT a)<br>返回值: string<br>说明:如果变量是int类型，那么返回a的十六进制表示；如果变量是string类型，则返回该字符串的十六进制表示<br>举例：<br>hive&gt; select hex(17) from lxw_dual;<br>11<br>hive&gt; select hex(‘abc’) from lxw_dual;<br>616263</p>
+</li>
+<li><p>反转十六进制函数: unhex<br>语法: unhex(string a)<br>返回值: string<br>说明:返回该十六进制字符串所代码的字符串<br>举例：<br>hive&gt; select unhex(‘616263’) from lxw_dual;<br>abc<br>hive&gt; select unhex(‘11’) from lxw_dual;<br>-<br>hive&gt; select unhex(616263) from lxw_dual;<br>abc</p>
+</li>
+<li><p>进制转换函数: conv<br>语法: conv(BIGINT num, int from_base, int to_base)<br>返回值: string<br>说明:将数值num从from_base进制转化到to_base进制<br>举例：<br>hive&gt; select conv(17,10,16) from lxw_dual;<br>11<br>hive&gt; select conv(17,10,2) from lxw_dual;<br>10001</p>
+</li>
+<li><p>绝对值函数: abs<br>语法: abs(double a)  abs(int a)<br>返回值: double       int<br>说明:返回数值a的绝对值<br>举例：<br>hive&gt; select abs(-3.9) from lxw_dual;<br>3.9<br>hive&gt; select abs(10.9) from lxw_dual;<br>10.9</p>
+</li>
+<li><p>正取余函数: pmod<br>语法: pmod(int a, int b),pmod(double a, double b)<br>返回值: int double<br>说明:返回正的a除以b的余数<br>举例：<br>hive&gt; select pmod(9,4) from lxw_dual;<br>1<br>hive&gt; select pmod(-9,4) from lxw_dual;<br>3</p>
+</li>
+<li><p>正弦函数: sin<br>语法: sin(double a)<br>返回值: double<br>说明:返回a的正弦值<br>举例：<br>hive&gt; select sin(0.8) from lxw_dual;<br>0.7173560908995228</p>
+</li>
+<li><p>反正弦函数: asin<br>语法: asin(double a)<br>返回值: double<br>说明:返回a的反正弦值<br>举例：<br>hive&gt; select asin(0.7173560908995228) from lxw_dual;<br>0.8</p>
+</li>
+<li><p>余弦函数: cos<br>语法: cos(double a)<br>返回值: double<br>说明:返回a的余弦值<br>举例：<br>hive&gt; select cos(0.9) from lxw_dual;<br>0.6216099682706644</p>
+</li>
+<li><p>反余弦函数: acos<br>语法: acos(double a)<br>返回值: double<br>说明:返回a的反余弦值<br>举例：<br>hive&gt; select acos(0.6216099682706644) from lxw_dual;<br>0.9</p>
+</li>
+<li>positive函数: positive<br>语法: positive(int a), positive(double a)<br>返回值: int double<br>说明:返回a<br>举例：<br>hive&gt; select positive(-10) from lxw_dual;<br>-10<br>hive&gt; select positive(12) from lxw_dual;<br>12</li>
+<li>negative函数: negative<br>语法: negative(int a), negative(double a)<br>返回值: int double<br>说明:返回-a<br>举例：<br>hive&gt; select negative(-5) from lxw_dual;<br>5<br>hive&gt; select negative(8) from lxw_dual;<br>-8<br>五、日期函数</li>
+<li>UNIX时间戳转日期函数:from_unixtime<br>语法: from_unixtime(bigint unixtime[, string format])<br>返回值: string<br>说明:转化UNIX时间戳（从1970-01-01 00:00:00 UTC到指定时间的秒数）到当前时区的时间格式<br>举例：<br>hive&gt; select from_unixtime(1323308943,’yyyyMMdd’) fromlxw_dual;<br>20111208</li>
+<li>获取当前UNIX时间戳函数:unix_timestamp<br>语法: unix_timestamp()<br>返回值: bigint<br>说明:获得当前时区的UNIX时间戳<br>举例：<br>hive&gt; select unix_timestamp() from lxw_dual;<br>1323309615<br>hive&gt; select from_unixtime(unix_timestamp());<br>OK<br>2017-10-13 00:09:13</li>
+<li>日期转UNIX时间戳函数:unix_timestamp<br>语法: unix_timestamp(string date)<br>返回值: bigint<br>说明:转换格式为”yyyy-MM-ddHH:mm:ss”的日期到UNIX时间戳。如果转化失败，则返回0。<br>举例：<br>hive&gt; select unix_timestamp(‘2011-12-07 13:01:03’) from lxw_dual;<br>1323234063</li>
+<li>指定格式日期转UNIX时间戳函数:unix_timestamp<br>语法: unix_timestamp(string date, string pattern)<br>返回值: bigint<br>说明:转换pattern格式的日期到UNIX时间戳。如果转化失败，则返回0。<br>举例：<br>hive&gt; select unix_timestamp(‘20111207 13:01:03’,’yyyyMMddHH:mm:ss’) from lxw_dual;<br>1323234063</li>
+<li><p>日期时间转日期函数:to_date<br>语法: to_date(string timestamp)<br>返回值: string<br>说明:返回日期时间字段中的日期部分。<br>举例：<br>hive&gt; select to_date(‘2011-12-08 10:03:01’) from lxw_dual;<br>2011-12-08</p>
+</li>
+<li><p>日期转年函数: year<br>语法: year(string date)<br>返回值: int<br>说明:返回日期中的年。<br>举例：<br>hive&gt; select year(‘2011-12-08 10:03:01’) from lxw_dual;<br>2011<br>hive&gt; select year(‘2012-12-08’) from lxw_dual;<br>2012</p>
+</li>
+<li><p>日期转月函数: month<br>语法: month (string date)<br>返回值: int<br>说明:返回日期中的月份。<br>举例：<br>hive&gt; select month(‘2011-12-08 10:03:01’) from lxw_dual;<br>12<br>hive&gt; select month(‘2011-08-08’) from lxw_dual;<br>8</p>
+</li>
+<li><p>日期转天函数: day<br>语法: day (string date)<br>返回值: int<br>说明:返回日期中的天。<br>举例：<br>hive&gt; select day(‘2011-12-08 10:03:01’) from lxw_dual;<br>8<br>hive&gt; select day(‘2011-12-24’) from lxw_dual;<br>24</p>
+</li>
+<li><p>日期转小时函数: hour<br>语法: hour (string date)<br>返回值: int<br>说明:返回日期中的小时。<br>举例：<br>hive&gt; select hour(‘2011-12-08 10:03:01’) from lxw_dual;<br>10</p>
+</li>
+<li><p>日期转分钟函数: minute<br>语法: minute (string date)<br>返回值: int<br>说明:返回日期中的分钟。<br>举例：<br>hive&gt; select minute(‘2011-12-08 10:03:01’) from lxw_dual;<br>3</p>
+</li>
+<li><p>日期转秒函数: second<br>语法: second (string date)<br>返回值: int<br>说明:返回日期中的秒。<br>举例：<br>hive&gt; select second(‘2011-12-08 10:03:01’) from lxw_dual;<br>1</p>
+</li>
+<li><p>日期转周函数:weekofyear<br>语法: weekofyear (string date)<br>返回值: int<br>说明:返回日期在当前的周数。<br>举例：<br>hive&gt; select weekofyear(‘2011-12-08 10:03:01’) from lxw_dual;<br>49</p>
+</li>
+<li><p>日期比较函数: datediff<br>语法: datediff(string enddate, string startdate)<br>返回值: int<br>说明:返回结束日期减去开始日期的天数。<br>举例：<br>hive&gt; select datediff(‘2012-12-08’,’2012-05-09’) from lxw_dual;<br>213</p>
+</li>
+<li><p>日期增加函数: date_add<br>语法: date_add(string startdate, int days)<br>返回值: string<br>说明:返回开始日期startdate增加days天后的日期。<br>举例：<br>hive&gt; select date_add(‘2012-12-08’,10) from lxw_dual;<br>2012-12-18</p>
+</li>
+<li><p>日期减少函数: date_sub<br>语法: date_sub (string startdate, int days)<br>返回值: string<br>说明:返回开始日期startdate减少days天后的日期。<br>举例：<br>hive&gt; select date_sub(‘2012-12-08’,10) from lxw_dual;<br>2012-11-28</p>
+</li>
+</ol>
+<p>六、条件函数</p>
+<ol>
+<li><p>If函数: if<br>语法: if(boolean testCondition, T valueTrue, T valueFalseOrNull)<br>返回值: T<br>说明: 当条件testCondition为TRUE时，返回valueTrue；否则返回valueFalseOrNull<br>举例：<br>hive&gt; select if(1=2,100,200) from lxw_dual;<br>200<br>hive&gt; select if(1=1,100,200) from lxw_dual;<br>100</p>
+</li>
+<li><p>非空查找函数: COALESCE<br>语法: COALESCE(T v1, T v2,…)<br>返回值: T<br>说明: 返回参数中的第一个非空值；如果所有值都为NULL，那么返回NULL<br>举例：<br>hive&gt; select COALESCE(null,’100’,’50′) from lxw_dual;<br>100</p>
+</li>
+<li><p>条件判断函数：CASE<br>语法: CASE a WHEN b THEN c [WHEN d THEN e]* [ELSE f] END<br>返回值: T<br>说明：如果a等于b，那么返回c；如果a等于d，那么返回e；否则返回f<br>举例：<br>hive&gt; Select case 100 when 50 then ‘tom’ when 100 then ‘mary’else ‘tim’ end from lxw_dual;<br>mary<br>hive&gt; Select case 200 when 50 then ‘tom’ when 100 then ‘mary’else ‘tim’ end from lxw_dual;<br>tim</p>
+</li>
+<li><p>条件判断函数：CASE<br>语法: CASE WHEN a THEN b [WHEN c THEN d]* [ELSE e] END<br>返回值: T<br>说明：如果a为TRUE,则返回b；如果c为TRUE，则返回d；否则返回e<br>举例：<br>hive&gt; select case when 1=2 then ‘tom’ when 2=2 then ‘mary’ else’tim’ end from lxw_dual;<br>mary<br>hive&gt; select case when 1=1 then ‘tom’ when 2=2 then ‘mary’ else’tim’ end from lxw_dual;<br>tom</p>
+</li>
+</ol>
+<p>七、字符串函数</p>
+<ol>
+<li><p>字符串长度函数：length<br>语法: length(string A)<br>返回值: int<br>说明：返回字符串A的长度<br>举例：<br>hive&gt; select length(‘abcedfg’) from lxw_dual;<br>7</p>
+</li>
+<li><p>字符串反转函数：reverse<br>语法: reverse(string A)<br>返回值: string<br>说明：返回字符串A的反转结果<br>举例：<br>hive&gt; select reverse(abcedfg’) from lxw_dual;<br>gfdecba</p>
+</li>
+<li><p>字符串连接函数：concat<br>语法: concat(string A, string B…)<br>返回值: string<br>说明：返回输入字符串连接后的结果，支持任意个输入字符串<br>举例：<br>hive&gt; select concat(‘abc’,’def’,’gh’) from lxw_dual;<br>abcdefgh</p>
+</li>
+<li><p>带分隔符字符串连接函数：concat_ws（可以聚合数组）<br>语法: concat_ws(string SEP, string A, string B…)<br>返回值: string<br>说明：返回输入字符串连接后的结果，SEP表示各个字符串间的分隔符<br>举例：<br>hive&gt; select concat_ws(‘,’,’abc’,’def’,’gh’) from lxw_dual;<br>abc,def,gh</p>
+</li>
+<li><p>字符串截取函数：substr,substring<br>语法: substr(string A, int start),substring(string A, int start)<br>返回值: string<br>说明：返回字符串A从start位置到结尾的字符串<br>举例：<br>hive&gt; select substr(‘abcde’,3) from lxw_dual;<br>cde<br>hive&gt; select substring(‘abcde’,3) from lxw_dual;<br>cde<br>hive&gt;  selectsubstr(‘abcde’,-1) from lxw_dual; （和Oracle相同）<br>e</p>
+</li>
+<li><p>字符串截取函数：substr,substring<br>语法: substr(string A, int start, int len),substring(string A, intstart, int len)<br>返回值: string<br>说明：返回字符串A从start位置开始，长度为len的字符串<br>举例：<br>hive&gt; select substr(‘abcde’,3,2) from lxw_dual;<br>cd<br>hive&gt; select substring(‘abcde’,3,2) from lxw_dual;<br>cd<br>hive&gt;select substring(‘abcde’,-2,2) from lxw_dual;<br>de</p>
+</li>
+<li><p>字符串转大写函数：upper,ucase<br>语法: upper(string A) ucase(string A)<br>返回值: string<br>说明：返回字符串A的大写格式<br>举例：<br>hive&gt; select upper(‘abSEd’) from lxw_dual;<br>hive&gt; select ucase(‘abSEd’) from lxw_dual;</p>
+</li>
+<li><p>字符串转小写函数：lower,lcase<br>语法: lower(string A) lcase(string A)<br>返回值: string<br>说明：返回字符串A的小写格式<br>举例：<br>hive&gt; select lower(‘abSEd’) from lxw_dual;<br>absed<br>hive&gt; select lcase(‘abSEd’) from lxw_dual;<br>absed</p>
+</li>
+<li><p>去空格函数：trim<br>语法: trim(string A)<br>返回值: string<br>说明：去除字符串两边的空格<br>举例：<br>hive&gt; select trim(‘ abc ‘) from lxw_dual;<br>abc</p>
+</li>
+<li><p>左边去空格函数：ltrim<br>语法: ltrim(string A)<br>返回值: string<br>说明：去除字符串左边的空格<br>举例：<br>hive&gt; select ltrim(‘ abc ‘) from lxw_dual;<br>abc</p>
+</li>
+<li><p>右边去空格函数：rtrim<br>语法: rtrim(string A)<br>返回值: string<br>说明：去除字符串右边的空格<br>举例：<br>hive&gt; select rtrim(‘ abc ‘) from lxw_dual;<br>abc</p>
+</li>
+<li><p>正则表达式替换函数：regexp_replace<br>语法: regexp_replace(string A, string B, string C)<br>返回值: string<br>说明：将字符串A中的符合java正则表达式B的部分替换为C。注意，在有些情况下要使用转义字符,类似oracle中的regexp_replace函数。<br>举例：<br>hive&gt; select regexp_replace(‘foobar’, ‘oo|ar’, ‘’) from lxw_dual;<br>fb</p>
+</li>
+<li><p>json解析函数：get_json_object<br>语法: get_json_object(string json_string, string path)<br>返回值: string<br>说明：解析json的字符串json_string,返回path指定的内容。如果输入的json字符串无效，那么返回NULL。<br>举例：<br>hive&gt; select  get_json_object(‘{“store”:</p>
+<blockquote>
+<p>  {“fruit”:[{“weight”:8,”type”:”apple”},{“weight”:9,”type”:”pear”}],<br>   “bicycle”:{“price”:19.95,”color”:”red”}<br>  },<br> “email”:”amy@only_for_json_udf_test.NET”,<br> “owner”:”amy”<br>}<br>‘,’$.owner’) from lxw_dual;<br>amy</p>
+</blockquote>
+</li>
+<li><p>空格字符串函数：space<br>语法: space(int n)<br>返回值: string<br>说明：返回长度为n的字符串<br>举例：<br>hive&gt; select space(10) from lxw_dual;<br>hive&gt; select length(space(10)) from lxw_dual;<br>10</p>
+</li>
+<li><p>重复字符串函数：repeat<br>语法: repeat(string str, int n)<br>返回值: string<br>说明：返回重复n次后的str字符串<br>举例：<br>hive&gt; select repeat(‘abc’,5) from lxw_dual;<br>abcabcabcabcabc</p>
+</li>
+<li><p>首字符ascii函数：ascii<br>语法: ascii(string str)<br>返回值: int<br>说明：返回字符串str第一个字符的ascii码<br>举例：<br>hive&gt; select ascii(‘abcde’) from lxw_dual;<br>97</p>
+</li>
+<li><p>左补足函数：lpad<br>语法: lpad(string str, int len, string pad)<br>返回值: string<br>说明：将str进行用pad进行左补足到len位<br>举例：<br>hive&gt; select lpad(‘abc’,10,’td’) from lxw_dual;<br>tdtdtdtabc<br>注意：与GP，ORACLE不同，pad不能默认</p>
+</li>
+<li><p>右补足函数：rpad<br>语法: rpad(string str, int len, string pad)<br>返回值: string<br>说明：将str进行用pad进行右补足到len位<br>举例：<br>hive&gt; select rpad(‘abc’,10,’td’) from lxw_dual;<br>abctdtdtdt</p>
+</li>
+<li><p>分割字符串函数: split<br>语法: split(string str, stringpat)<br>返回值: array<br>说明:按照pat字符串分割str，会返回分割后的字符串数组<br>举例：<br>hive&gt; select split(‘abtcdtef’,’t’) from lxw_dual;<br>[“ab”,”cd”,”ef”]</p>
+</li>
+<li><p>集合查找函数:find_in_set<br>语法: find_in_set(string str, string strList)<br>返回值: int<br>说明:返回str在strlist第一次出现的位置，strlist是用逗号分割的字符串。如果没有找该str字符，则返回0<br>举例：<br>hive&gt; select find_in_set(‘ab’,’ef,ab,de’) from lxw_dual;<br>2<br>hive&gt; select find_in_set(‘at’,’ef,ab,de’) from lxw_dual;<br>0</p>
+</li>
+</ol>
+<p>八、集合统计函数</p>
+<ol>
+<li><p>个数统计函数: count<br>语法: count(<em>), count(expr), count(DISTINCT expr[, expr_.])<br>返回值: int<br>说明: count(</em>)统计检索出的行的个数，包括NULL值的行；count(expr)返回指定字段的非空值的个数；count(DISTINCTexpr[, expr_.])返回指定字段的不同的非空值的个数<br>举例：<br>hive&gt; select count(*) from lxw_dual;<br>20<br>hive&gt; select count(distinct t) from lxw_dual;<br>10</p>
+</li>
+<li><p>总和统计函数: sum<br>语法: sum(col), sum(DISTINCT col)<br>返回值: double<br>说明: sum(col)统计结果集中col的相加的结果；sum(DISTINCT col)统计结果中col不同值相加的结果<br>举例：<br>hive&gt; select sum(t) from lxw_dual;<br>100<br>hive&gt; select sum(distinct t) from lxw_dual;<br>70</p>
+</li>
+<li><p>平均值统计函数: avg<br>语法: avg(col), avg(DISTINCT col)<br>返回值: double<br>说明: avg(col)统计结果集中col的平均值；avg(DISTINCT col)统计结果中col不同值相加的平均值<br>举例：<br>hive&gt; select avg(t) from lxw_dual;<br>50<br>hive&gt; select avg (distinct t) from lxw_dual;<br>30</p>
+</li>
+<li><p>最小值统计函数: min<br>语法: min(col)<br>返回值: double<br>说明:统计结果集中col字段的最小值<br>举例：<br>hive&gt; select min(t) from lxw_dual;<br>20</p>
+</li>
+<li><p>最大值统计函数: max<br>语法: maxcol)<br>返回值: double<br>说明:统计结果集中col字段的最大值<br>举例：<br>hive&gt; select max(t) from lxw_dual;<br>120</p>
+</li>
+<li><p>非空集合总体变量函数:var_pop<br>语法: var_pop(col)<br>返回值: double<br>说明:统计结果集中col非空集合的总体变量（忽略null）<br>举例：</p>
+</li>
+<li><p>非空集合样本变量函数:var_samp<br>语法: var_samp (col)<br>返回值: double<br>说明:统计结果集中col非空集合的样本变量（忽略null）<br>举例：</p>
+</li>
+<li><p>总体标准偏离函数:stddev_pop<br>语法: stddev_pop(col)<br>返回值: double<br>说明:该函数计算总体标准偏离，并返回总体变量的平方根，其返回值与VAR_POP函数的平方根相同<br>举例：</p>
+</li>
+<li><p>样本标准偏离函数:stddev_samp<br>语法: stddev_samp (col)<br>返回值: double<br>说明:该函数计算样本标准偏离<br>举例：</p>
+</li>
+</ol>
+<p>10．中位数函数:percentile<br>语法: percentile(BIGINT col, p)<br>返回值: double<br>说明:求准确的第pth个百分位数，p必须介于0和1之间，但是col字段目前只支持整数，不支持浮点数类型<br>举例：</p>
+<ol start="11">
+<li><p>中位数函数:percentile<br>语法: percentile(BIGINT col, array(p1 [, p2]…))<br>返回值: array<double><br>说明:功能和上述类似，之后后面可以输入多个百分位数，返回类型也为array<double>，其中为对应的百分位数。<br>举例：<br>select percentile(score,&lt;0.2,0.4&gt;) from lxw_dual；取0.2，0.4位置的数据</double></double></p>
+</li>
+<li><p>近似中位数函数:percentile_approx<br>语法: percentile_approx(DOUBLE col, p [, B])<br>返回值: double<br>说明:求近似的第pth个百分位数，p必须介于0和1之间，返回类型为double，但是col字段支持浮点类型。参数B控制内存消耗的近似精度，B越大，结果的准确度越高。默认为10,000。当col字段中的distinct值的个数小于B时，结果为准确的百分位数<br>举例：</p>
+</li>
+<li><p>近似中位数函数:percentile_approx<br>语法: percentile_approx(DOUBLE col, array(p1 [, p2]…) [, B])<br>返回值: array<double><br>说明:功能和上述类似，之后后面可以输入多个百分位数，返回类型也为array<double>，其中为对应的百分位数。<br>举例：</double></double></p>
+</li>
+<li><p>直方图:histogram_numeric<br>语法: histogram_numeric(col, b)<br>返回值: array<struct {‘x’,‘y’}=""><br>说明:以b为基准计算col的直方图信息。<br>举例：<br>hive&gt; select histogram_numeric(100,5) from lxw_dual;<br>[{“x”:100.0,”y”:1.0}]</struct></p>
+</li>
+</ol>
+<p>九、复合类型构建操作</p>
+<ol>
+<li><p>Map类型构建: map<br>语法: map (key1, value1, key2, value2,…)<br>说明：根据输入的key和value对构建map类型<br>举例：<br>hive&gt; Create table lxw_test as select map(‘100’,’tom’,’200’,’mary’)as t from lxw_dual;<br>hive&gt; describe lxw_test;<br>t       map&lt;string,string&gt;<br>hive&gt; select t from lxw_test;<br>{“100”:”tom”,”200”:”mary”}</p>
+</li>
+<li><p>Struct类型构建: struct<br>语法: struct(val1, val2, val3,…)<br>说明：根据输入的参数构建结构体struct类型<br>举例：<br>hive&gt; create table lxw_test as select struct(‘tom’,’mary’,’tim’)as t from lxw_dual;<br>hive&gt; describe lxw_test;<br>t       struct<a href="col1:string,col2:string,col3:string" target="_blank" rel="noopener">col1:string,col2:string,col3:string</a><br>hive&gt; select t from lxw_test;<br>{“col1”:”tom”,”col2”:”mary”,”col3”:”tim”}</p>
+</li>
+<li><p>array类型构建: array<br>语法: array(val1, val2,…)<br>说明：根据输入的参数构建数组array类型<br>举例：<br>hive&gt; create table lxw_test as selectarray(“tom”,”mary”,”tim”) as t from lxw_dual;<br>hive&gt; describe lxw_test;<br>t       array<string><br>hive&gt; select t from lxw_test;<br>[“tom”,”mary”,”tim”]</string></p>
+</li>
+</ol>
+<p>十、复杂类型访问操作</p>
+<ol>
+<li><p>array类型访问: A[n]<br>语法: A[n]<br>操作类型: A为array类型，n为int类型<br>说明：返回数组A中的第n个变量值。数组的起始下标为0。比如，A是个值为[‘foo’, ‘bar’]的数组类型，那么A[0]将返回’foo’,而A[1]将返回’bar’<br>举例：<br>hive&gt; create table lxw_test as selectarray(“tom”,”mary”,”tim”) as t from lxw_dual;<br>hive&gt; select t[0],t[1],t[2] from lxw_test;<br>tom     mary   tim</p>
+</li>
+<li><p>map类型访问: M[key]<br>语法: M[key]<br>操作类型: M为map类型，key为map中的key值<br>说明：返回map类型M中，key值为指定值的value值。比如，M是值为{‘f’ -&gt; ‘foo’, ‘b’-&gt; ‘bar’, ‘all’ -&gt; ‘foobar’}的map类型，那么M[‘all’]将会返回’foobar’<br>举例：<br>hive&gt; Create table lxw_test as selectmap(‘100’,’tom’,’200’,’mary’) as t from lxw_dual;<br>hive&gt; select t[‘200’],t[‘100’] from lxw_test;<br>mary    tom</p>
+</li>
+<li><p>struct类型访问: S.x<br>语法: S.x<br>操作类型: S为struct类型<br>说明：返回结构体S中的x字段。比如，对于结构体struct foobar {int foo, int bar}，foobar.foo返回结构体中的foo字段<br>举例：<br>hive&gt; create table lxw_test as select struct(‘tom’,’mary’,’tim’)as t from lxw_dual;<br>hive&gt; describe lxw_test;<br>t       struct<a href="col1:string,col2:string,col3:string" target="_blank" rel="noopener">col1:string,col2:string,col3:string</a><br>hive&gt; select t.col1,t.col3 from lxw_test;<br>tom     tim</p>
+</li>
+</ol>
+<p>十一、复杂类型长度统计函数</p>
+<ol>
+<li><p>Map类型长度函数: size(Map&lt;K.V&gt;)<br>语法: size(Map&lt;K.V&gt;)<br>返回值: int<br>说明:返回map类型的长度<br>举例：<br>hive&gt; select size(map(‘100’,’tom’,’101’,’mary’)) from lxw_dual;<br>2</p>
+</li>
+<li><p>array类型长度函数: size(Array<t>)<br>语法: size(Array<t>)<br>返回值: int<br>说明:返回array类型的长度<br>举例：<br>hive&gt; select size(array(‘100’,’101’,’102’,’103’)) from lxw_dual;<br>4</t></t></p>
+</li>
+<li><p>类型转换函数<br>类型转换函数: cast<br>语法: cast(expr as <type>)<br>返回值: Expected “=” to follow “type”<br>说明:返回array类型的长度<br>举例：<br>hive&gt; select cast(1 as bigint) from lxw_dual;<br>1</type></p>
+</li>
+</ol>
 
         </div>
     
@@ -206,7 +839,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hello-world/">Hello World</a>
+                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
             </li>
             
         </ul>
@@ -293,7 +938,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="mailto:test@example.com">
+                        <a href="mailto:hcfq2018@163.com">
                             <span class="footer-icon-container">
                                 <i class="fa fa-envelope-o"></i>
                             </span>

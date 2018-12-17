@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="注：mr需要时间同步安装hive（jdk，hadoop）一：建表create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;二：删除表drop table t">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="hive 笔记">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Fecy Note">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary">
+    
+
+    <!-- Title -->
+    
+    <title>hive 笔记 - Fecy Note</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/fecy.xyz">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-笔记/">
+                hive 笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>注：mr需要时间同步<br>安装hive（jdk，hadoop）<br>一：建表<br>create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;<br>二：删除表<br>drop table tablename;<br>三：内部表跟外部表<br>    内部表（一创建的形式，存储的数据在/user/hive/warehouse下面）<br>    外部表（关联一个已经存在的文件夹（HDFS上））<br>    删除的时候：内部表删除表的时候会把数据一并删除，外部表的时候只会删除关联数据<br>create external table t_user (id String,name String) row format delimited fields terminated by ‘ ‘ location ‘/hive/t_user’;<br>四：分区表(分区的字段，不能出现在字段里面)<br>create table t_partition(id String,name String) partitioned by(dt String) row format delimited fields terminated by ‘ ‘;<br>加载数据：load data local inpath ‘/root/user.txt’ into table t_partition partition(dt=”2018-11-01”);</p>
+<p>五：数据导入（hadoop fs -put …..）<br>    hdfs中导入 load data inpath ‘/hive/t_user/user.txt’ into table t_user;<br>    从linux文件系统里面进行导入数据  load data local inpath ‘/root/t_person.txt’ into table t_person;<br>六：导出数据(hadoop fs -get ……)<br>    insert overwrite directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select <em> from t_user;<br>    insert overwrite local directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select </em> from t_user;<br>七：文件存储格式<br>    默认存储textfile<br>    stored as textfile;</p>
+<p>基本的数据类型 int string boolean …<br>array类型<br>战狼2,吴京:吴刚:龙母,2017-08-16<br>三生三世十里桃花,刘亦菲:痒痒,2017-08-20</p>
+<p>create table t_movie(movie_name string,actors array<string>,dt date)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</string></p>
+<p>select actors[0] from t_movie;<br>select <em> from t_movie where movie_name=”战狼2”;<br>select </em> from t_movie where array_contains(actors,”吴京”);<br>select movie_name,size(actors) from t_movie;</p>
+<p>map类型<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,28<br>2,lisi,father:mayun#mother:huangyi#brother:guanyu,22<br>create table t_person(id int,name string,family_members map&lt;String,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>通过key获取value<br>select name,family_members[‘father’] from t_person;</p>
+<p>获取所有的key<br>select name,map_keys(family_members) from t_person;</p>
+<p>获取所有的value<br>select name,map_values(family_members) from t_person;</p>
+<p>structs（javabean）类型<br>1,zhangsan,18:male:beijing<br>2,lisi,28:female:shanghai</p>
+<p>create table t_person_structs(id int,name string,struct_info struct<a href="age:int,sex:string,addr:string" target="_blank" rel="noopener">age:int,sex:string,addr:string</a>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;<br>load data local inpath ‘/root/t_person_struct.txt’ into table t_person_structs;</p>
+<p>select name,struct_info.age from t_person_structs;<br> 使用本地模式进行运算<br> set hive.exec.mode.local.auto=true;</p>
+<p>join</p>
+<p>a,1<br>b,2<br>c,3<br>d,4</p>
+<p>a,xx<br>b,yy<br>d,zz<br>e,pp</p>
+<p>drop table t_a;<br>drop table t_b;<br>create table t_a(name string,age int) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/a.txt’ into table t_a;</p>
+<p>create table t_b(name string,nickname string) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/b.txt’ into table t_b;<br>内连接<br>select * from t_a a join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| d       | 4      | d       | zz          |<br>+———+——–+———+————-+–+</p>
+<p>左外连接<br>select * from t_a a left join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| c       | 3      | NULL    | NULL        |<br>| d       | 4      | d       | zz          |<br>+———+——–+———+————-+–+</p>
+<p>右外连接<br>select * from t_a a right join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| d       | 4      | d       | zz          |<br>| NULL    | NULL   | e       | pp          |<br>+———+——–+———+————-+–+</p>
+<p>全外连接 full outer join<br>select * from t_a a full outer join t_b b on a.name=b.name;<br>+———+——–+———+————-+–+<br>| a.name  | a.age  | b.name  | b.nickname  |<br>+———+——–+———+————-+–+<br>| a       | 1      | a       | xx          |<br>| b       | 2      | b       | yy          |<br>| c       | 3      | NULL    | NULL        |<br>| d       | 4      | d       | zz          |<br>| NULL    | NULL   | e       | pp          |<br>+———+——–+———+————-+–+</p>
+<p>semi join(左表数据   注：select 不能出现右表字段)<br>select * from t_a a left semi join t_b b on a.name=b.name;<br>+———+——–+–+<br>| a.name  | a.age  |<br>+———+——–+–+<br>| a       | 1      |<br>| b       | 2      |<br>| d       | 4      |<br>+———+——–+–+</p>
+<p>————————————————-第二天————————–<br><a href="https://cloud.tencent.com/developer/article/1120640" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1120640</a></p>
+<p>20170804,192.168.33.66,<a href="http://www.edu360.cn/job" target="_blank" rel="noopener">http://www.edu360.cn/job</a><br>group by</p>
+<p>create table t_access(dt string,ip string,url string) row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/access.txt’ into table t_access;<br>select dt,count(1) c from t_access where 1=1 group by dt,ip having c&gt;1;</p>
+<p>注：select 只能出现group by后面的字段    其他的字段只能出现在聚合函数中<br>    having  聚合之后的过滤   （where 只能过滤分组之前的数据）</p>
+<p>子查询<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,28</p>
+<p>create table t_person(id string,username string,family map&lt;string,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>load data local inpath ‘/root/person.txt’ into table t_person;<br>– 查询有兄弟的人</p>
+<p>select * from<br>(select username,family[‘brother’] as brother from t_person) tmp<br>where brother is not null;</p>
+<p>select username,family[‘brother’],age from t_person where array_contains(map_keys(family),’brother’);</p>
+<p>排序：order by 字段         降序的得手在字段后面加上desc<br>select username,family[‘brother’],age from t_person where array_contains(map_keys(family),’brother’) order by age;</p>
+<p>条件控制语句<br>年龄<br>select username,<br>case<br>    when age<20 then="" 'young'="" when="" age="">19 and age&lt;25  then ‘moddle’<br>    else ‘old’<br>end<br>as chenghu<br>from t_person;</20></p>
+<p>if     if(条件语句,”成立时候返回的结果”,”不成立的时候返回的结果”)<br>select username,if(age&gt;20,”old”,’young’) from t_person;</p>
+<p>行列转换   explode(Array())<br>化学<br>物理<br>数学<br>语文<br>化学<br>数学<br>语文<br>select explode (array(1,2,3,4));<br>1,zhangsan,化学:物理:数学:语文</p>
+<p>create table t_subject(id string,username string,subject array<string>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</string></p>
+<p>load data local inpath ‘/root/subject.txt’ into table t_subject;</p>
+<p>都有哪些科目<br>select distinct(tmp.sub) from<br>(select explode(subject) as sub from t_subject) tmp;</p>
+<p>表生成函数(将数组生成每列的数据)<br>select id,username,tmp.sub from t_subject lateral view explode(subject) tmp as sub;</p>
+<p>json解析<br>create table t_json(json String);<br>load data local inpath ‘/root/rating.json’ into table t_json;<br>把生成的数据导入到一张表里面<br>create table t_rate<br>as<br>select json_tuple(json,’movie’,’rate’,’timeStamp’,’uid’) as (movieid,rate,timeS,ui) from t_json;</p>
+<p>分组topn<br>1,18,a,male</p>
+<p>create table t_topn(id string,age int,name string,sex string)<br>row format delimited fields terminated by ‘,’<br>;</p>
+<p>load data local inpath ‘/root/topn.txt’ into table t_topn;<br>select * from<br>(select id,age,name,sex,row_number() over(partition by sex order by age desc) as rank from t_topn) as tmp<br>where rank &lt;3<br>;</p>
+<p>select sex s from t_topn group by sex;</p>
+<p>用户    月份    月总额    累计到当月的总额<br>每个用户的销售金额累计（按月）<br>A    2015-01    33    33<br>A    2015-02    10    43<br>A    2015-03    30    73<br>B    2015-01    30    30<br>B    2015-02    15    45</p>
+<p>销售记录报表生成<br>A,2015-01-08,5<br>A,2015-01-11,15<br>B,2015-01-12,5<br>A,2015-01-12,8</p>
+<p>drop table t_sale;<br>create table t_sale(username string,dt string,money int)<br>row format delimited fields terminated by ‘,’;</p>
+<p>load data local inpath ‘/root/sale.txt’ into table t_sale;<br>– 计算出每个月的销售金额<br>select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7);</p>
+<p>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |<br>| A         | 2015-02  | 10   |<br>| A         | 2015-03  | 20   |<br>| B         | 2015-01  | 30   |<br>| B         | 2015-02  | 15   |<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+</p>
+<p>– 自关联（）<br>select * from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username;</p>
+<p>+————–+———-+—————-+————–+———-+—————-+–+<br>| t1.username  |  t1.yue  | t1.month_sale  | t2.username  |  t2.yue  | t2.month_sale  |<br>+————–+———-+—————-+————–+———-+—————-+–+<br>| A            | 2015-01  | 33             | A            | 2015-01  | 33             |</p>
+<p>| A            | 2015-02  | 10             | A            | 2015-01  | 33             |<br>| A            | 2015-02  | 10             | A            | 2015-02  | 10             |</p>
+<p>| A            | 2015-03  | 20             | A            | 2015-01  | 33             |<br>| A            | 2015-03  | 20             | A            | 2015-02  | 10             |<br>| A            | 2015-03  | 20             | A            | 2015-03  | 20             |</p>
+<p>| B            | 2015-01  | 30             | B            | 2015-01  | 30             |<br>| B            | 2015-01  | 30             | B            | 2015-02  | 15             |<br>| B            | 2015-01  | 30             | B            | 2015-03  | 45             |<br>| B            | 2015-02  | 15             | B            | 2015-01  | 30             |<br>| B            | 2015-02  | 15             | B            | 2015-02  | 15             |<br>| B            | 2015-02  | 15             | B            | 2015-03  | 45             |<br>| B            | 2015-03  | 45             | B            | 2015-01  | 30             |<br>| B            | 2015-03  | 45             | B            | 2015-02  | 15             |<br>| B            | 2015-03  | 45             | B            | 2015-03  | 45             |<br>| C            | 2015-01  | 60             | C            | 2015-01  | 60             |<br>| C            | 2015-01  | 60             | C            | 2015-02  | 10             |<br>| C            | 2015-01  | 60             | C            | 2015-03  | 30             |<br>| C            | 2015-02  | 10             | C            | 2015-01  | 60             |<br>| C            | 2015-02  | 10             | C            | 2015-02  | 10             |<br>| C            | 2015-02  | 10             | C            | 2015-03  | 30             |<br>| C            | 2015-03  | 30             | C            | 2015-01  | 60             |<br>| C            | 2015-03  | 30             | C            | 2015-02  | 10             |<br>| C            | 2015-03  | 30             | C            | 2015-03  | 30             |<br>+————–+———-+—————-+————–+———-+—————-+–+<br>select t1.username,t1.yue,t1.month_sale,t2.month_sale from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username<br>where t1.yue&gt;=t2.yue;<br>+————–+———-+—————-+—————-+–+<br>| t1.username  |  t1.yue  | t1.month_sale  | t2.month_sale  |<br>+————–+———-+—————-+—————-+–+<br>| A            | 2015-01  | 33             | 33             |</p>
+<p>| A            | 2015-02  | 10             | 33             |<br>| A            | 2015-02  | 10             | 10             |</p>
+<p>| A            | 2015-03  | 20             | 33             |<br>| A            | 2015-03  | 20             | 10             |<br>| A            | 2015-03  | 20             | 20             |</p>
+<p>| B            | 2015-01  | 30             | 30             |<br>| B            | 2015-02  | 15             | 30             |<br>| B            | 2015-02  | 15             | 15             |<br>| B            | 2015-03  | 45             | 30             |<br>| B            | 2015-03  | 45             | 15             |<br>| B            | 2015-03  | 45             | 45             |<br>| C            | 2015-01  | 60             | 60             |<br>| C            | 2015-02  | 10             | 60             |<br>| C            | 2015-02  | 10             | 10             |<br>| C            | 2015-03  | 30             | 60             |<br>| C            | 2015-03  | 30             | 10             |<br>| C            | 2015-03  | 30             | 30             |<br>+————–+———-+—————-+—————-+–+</p>
+<p>select t1.username,t1.yue,t1.month_sale,sum(t2.month_sale) from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t1<br>join<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) t2<br>on t1.username=t2.username<br>where t1.yue&gt;=t2.yue<br>group by t1.username,t1.yue,t1.month_sale;<br>+————–+———-+——+–+<br>| t1.username  |  t1.yue  | _c2  |<br>+————–+———-+——+–+<br>| A            | 2015-01  | 33   |<br>| A            | 2015-02  | 43   |<br>| A            | 2015-03  | 63   |<br>| B            | 2015-01  | 30   |<br>| B            | 2015-02  | 45   |<br>| B            | 2015-03  | 90   |<br>| C            | 2015-01  | 60   |<br>| C            | 2015-02  | 70   |<br>| C            | 2015-03  | 100  |<br>+————–+———-+——+–+</p>
+<p>– 使用窗口函数做累计报表<br>– 计算出每个月的销售金额<br>select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7);<br>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |   33<br>| A         | 2015-02  | 10   |   33+10<br>| A         | 2015-03  | 20   |   33+10+20<br>| B         | 2015-01  | 30   |   30<br>| B         | 2015-02  | 15   |<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+<br>select tmp.username,tmp.yue,tmp.month_sale,<br>sum(tmp.month_sale) over(partition by tmp.username order by tmp.yue)<br>from<br>(select username,substr(dt,1,7)  as yue,sum(money) as month_sale from t_sale<br>group by username,substr(dt,1,7)) as tmp;</p>
+<p>+———–+———-+——+–+<br>| username  |   _c1    | yue  |<br>+———–+———-+——+–+<br>| A         | 2015-01  | 33   |   1<br>| A         | 2015-01  | 33   |   2<br>| A         | 2015-02  | 10   |   3<br>| A         | 2015-03  | 20   |   4<br>| B         | 2015-01  | 30   |   1<br>| B         | 2015-02  | 15   |   2<br>| B         | 2015-03  | 45   |<br>| C         | 2015-01  | 60   |<br>| C         | 2015-02  | 10   |<br>| C         | 2015-03  | 30   |<br>+———–+———-+——+–+</p>
+<p>wc<br>create table t_wc(line string);<br>load data local inpath ‘/root/wc.txt’ into table t_wc;</p>
+<p>select word,count(1) cont from<br>(select explode(split(line,’ ‘)) as word from t_wc) tmp<br>group by word<br>order by cont desc;</p>
+<p>连续销售记录<br>create table t_shop_sale(username string,dt string,money int)<br>row format delimited fields terminated by ‘,’;<br>load data local inpath ‘/root/shop.txt’ into table t_shop_sale;</p>
+<p>– 根据username分组，根据时间排序 打编号<br>select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale;</p>
+<p>select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp;</p>
+<p>select username,count(1) as cnt from<br>(select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp1) tmp2<br>group by username,flag;</p>
+<p>select distinct(username) from<br>(select username,count(1) as cnt from<br>(select username,dt,rn,date_sub(to_date(dt),rn) as flag from<br>(select username,dt,money,row_number() over(partition by username order by dt) rn from t_shop_sale) tmp1) tmp2<br>group by username,flag) tmp3<br>where cnt&gt;=3;</p>
+<p>A,2017-10-11,300 1 2017-10-10<br>A,2017-10-12,200 2 2017-10-10<br>A,2017-10-13,100 3 2017-10-10<br>A,2017-10-15,100 4 2017-10-11<br>A,2017-10-16,300 5<br>A,2017-10-17,150 6<br>A,2017-10-18,340 7<br>A,2017-10-19,360 8</p>
+<p>B,2017-10-11,400 1<br>B,2017-10-12,200 2<br>B,2017-10-15,600 3</p>
+<p>C,2017-10-11,350<br>C,2017-10-13,250<br>C,2017-10-14,300<br>C,2017-10-15,400<br>C,2017-10-16,200</p>
+<p>D,2017-10-13,500<br>D,2017-10-14,600</p>
+<p>E,2017-10-14,600<br>E,2017-10-15,500</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:hcfq2018@163.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

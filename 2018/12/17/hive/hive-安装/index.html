@@ -10,6 +10,10 @@
 
     <!--Description-->
     
+        <meta name="description" content="准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）安装：直接解压一个hive安装包即可此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库此模式不便于让团队成员之间共享协作
+1.1.1. mysql安装yum安装
+①　给root">
+    
 
     <!--Author-->
     
@@ -18,7 +22,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Fecy Note">
+        <meta property="og:title" content="hive 安装">
     
 
     <!--Open Graph Description-->
@@ -29,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -40,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Archives: 2018 - Fecy Note</title>
+    <title>hive 安装 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,9 +131,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -137,79 +139,65 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2018</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/mysql-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        mysql 安装
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-安装/">
+                hive 安装
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）<br>安装：直接解压一个hive安装包即可<br>此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库<br>此模式不便于让团队成员之间共享协作</p>
+<p>1.1.1. mysql安装<br>yum安装</p>
+<p>①　给root用户授予从任何机器上登陆mysql服务器的权限：<br>mysql&gt; grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘你的密码’ with grant option;<br>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br>注意点：要让mysql可以远程登录访问<br>最直接测试方法：从windows上用Navicat去连接，能连，则可以，不能连，则要去mysql的机器上用命令行客户端进行授权：<br>在mysql的机器上,启动命令行客户端：<br>mysql -uroot -proot<br>mysql&gt;grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root的密码’ with grant option;<br>mysql&gt;flush privileges;</p>
+<p>1.1.2. hive的元数据库配置<br>vi conf/hive-site.xml</p>
+<configuration><property><name>javax.jdo.option.ConnectionURL</name><value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true</value><description>JDBC connect string for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionDriverName</name><value>com.mysql.jdbc.Driver</value><description>Driver class name for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionUserName</name><value>root</value><description>username to use against metastore database</description></property> <property><name>javax.jdo.option.ConnectionPassword</name><value>123456</value><description>password to use against metastore database</description></property></configuration>
+
+<p>2、上传一个mysql的驱动jar包到hive的安装目录的lib中</p>
+<p>3、配置HADOOP_HOME 和HIVE_HOME到系统环境变量中：/etc/profile<br>4、source /etc/profile<br>5、hive启动测试<br>然后用命令启动hive交互界面：<br>[root@hdp20-04 ~]# hive</p>
+<p>设置一些基本参数，让hive使用起来更便捷，比如：<br>1、让提示符显示当前库：<br>hive&gt;set hive.cli.print.current.db=true;<br>2、显示查询结果时显示字段名称：<br>hive&gt;set hive.cli.print.header=true;</p>
+<p>但是这样设置只对当前会话有效，重启hive会话后就失效，解决办法：<br>在linux的当前用户目录中，编辑一个.hiverc文件，将参数写入其中：<br>vi .hiverc<br>set hive.cli.print.header=true;set hive.cli.print.current.db=true;</p>
+<p>1.1. 启动hive服务使用<br>启动hive的服务：<br>[root@hdp20-04 hive-1.2.1]# bin/hiveserver2 -hiveconf hive.root.logger=DEBUG,console</p>
+<p>上述启动，会将这个服务启动在前台，如果要启动在后台，则命令如下：<br>nohup bin/hiveserver2 1&gt;/dev/null 2&gt;&amp;1 &amp;</p>
+<p>启动成功后，可以在别的节点上用beeline去连接<br>v 方式（1）<br>[root@hdp20-04 hive-1.2.1]# bin/beeline  回车，进入beeline的命令界面<br>输入命令连接hiveserver2<br>beeline&gt; !connect jdbc:hive2://fecy-hadoop02:10000<br>（hadoop01是hiveserver2所启动的那台主机名，端口默认是10000）<br>v 方式（2）<br>启动时直接连接：<br>bin/beeline -u jdbc:hive2://mini1:10000 -n root</p>
+<p>接下来就可以做正常sql查询了</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-案例/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 案例
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-总结/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 总结
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 安装
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-使用/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 使用
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-笔记/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-函数大全/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive Hive函数大全
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
+
 
 </div>
 

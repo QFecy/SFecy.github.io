@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="hive中有一个默认的库：库名： default库目录：hdfs://hdp20-01:9000/user/hive/warehouse
+新建库：create database db_order;库建好后，在hdfs中会生成一个库目录：hdfs://hdp20-01:9000/user/hive/w">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="hive 使用">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Fecy Note">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary">
+    
+
+    <!-- Title -->
+    
+    <title>hive 使用 - Fecy Note</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/fecy.xyz">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-使用/">
+                hive 使用
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>hive中有一个默认的库：<br>库名： default<br>库目录：hdfs://hdp20-01:9000/user/hive/warehouse</p>
+<p>新建库：<br>create database db_order;<br>库建好后，在hdfs中会生成一个库目录：<br>hdfs://hdp20-01:9000/user/hive/warehouse/db_order.db</p>
+<p>1.1.1. 基本建表语句<br>use db_order;<br>create table t_order(id string,create_time string,amount float,uid string);<br>表建好后，会在所属的库目录中生成一个表目录<br>/user/hive/warehouse/db_order.db/t_order<br>只是，这样建表的话，hive会认为表数据文件中的字段分隔符为 ^A（\001）</p>
+<p>正确的建表语句为：<br>create table t_order(id string,create_time string,amount float,uid string)<br>row format delimited<br>fields terminated by ‘,’;</p>
+<p>这样就指定了，我们的表数据文件中的字段分隔符为 “,”<br>1.1.2. 删除表<br>drop table t_order;<br>删除表的效果是：<br>hive会从元数据库中清除关于这个表的信息；<br>hive还会从hdfs中删除这个表的表目录；</p>
+<p>1.1.3. 内部表与外部表<br>内部表(MANAGED_TABLE)：表目录按照hive的规范来部署，位于hive的仓库目录/user/hive/warehouse中</p>
+<p>外部表(EXTERNAL_TABLE)：表目录由建表用户自己指定<br>create external table t_access(ip string,url string,access_time string)<br>row format delimited<br>fields terminated by ‘,’<br>location ‘/access/log’;<br>外部表和内部表的特性差别：<br>1、内部表的目录在hive的仓库目录中 VS 外部表的目录由用户指定<br>2、drop一个内部表时：hive会清除相关元数据，并删除表数据目录<br>3、drop一个外部表时：hive只会清除相关元数据；</p>
+<p>一个hive的数据仓库，最底层的表，一定是来自于外部系统，为了不影响外部系统的工作逻辑，在hive中可建external表来映射这些外部系统产生的数据目录；<br>然后，后续的etl操作，产生的各种中间表建议用managed_table（内部表）</p>
+<p>1.1.4. 分区表<br>分区表的实质是：在表目录中为数据文件创建分区子目录，以便于在查询时，MR程序可以针对分区子目录中的数据进行处理，缩减读取数据的范围。</p>
+<p>比如，网站每天产生的浏览记录，浏览记录应该建一个表来存放，但是，有时候，我们可能只需要对某一天的浏览记录进行分析<br>这时，就可以将这个表建为分区表，每天的数据导入其中的一个分区；<br>当然，每日的分区目录，应该有一个目录名（分区字段）</p>
+<p>1.1.4.1. 一个分区字段的实例：<br>示例如下：<br>1、创建带分区的表<br>create table t_access(ip string,url string,access_time string)partitioned by(dt string)row format delimitedfields terminated by ‘,’;<br>注意：分区字段不能是表定义中的已存在字段</p>
+<p>2、向分区中导入数据<br>load data local inpath ‘/root/access.log.2017-08-04.log’ into table t_access partition(dt=’20170804’);<br>load data local inpath ‘/root/access.log.2017-08-05.log’ into table t_access partition(dt=’20170805’);</p>
+<p>3、针对分区数据进行查询<br>a、统计8月4号的总PV：<br>select count(*) from t_access where dt=’20170804’;<br>实质：就是将分区字段当成表字段来用，就可以使用where子句指定分区了</p>
+<p>b、统计表中所有数据总的PV：<br>select count(*) from t_access;<br>实质：不指定分区条件即可</p>
+<p>1.1.4.2. 多个分区字段示例<br>建表：<br>create table t_partition(id int,name string,age int)<br>partitioned by(department string,sex string,howold int)<br>row format delimited fields terminated by ‘,’;</p>
+<p>导数据：<br>load data local inpath ‘/root/p1.dat’ into table t_partition partition(department=’xiangsheng’,sex=’male’,howold=20);<br>？？？<br>1.1.5. CTAS建表语法<br>可以通过已存在表来建表：<br>1、create table t_user_2 like t_user;<br>新建的t_user_2表结构定义与源表t_user一致，但是没有数据</p>
+<p>2、在建表的同时插入数据<br>create table t_access_userasselect ip,url from t_access;<br>t_access_user会根据select查询的字段来建表，同时将查询的结果插入新表中</p>
+<p>1.1. 数据导入导出<br>1.1.1. 将数据文件导入hive的表<br>方式1：导入数据的一种方式：<br>手动用hdfs命令，将文件放入表目录；</p>
+<p>方式2：在hive的交互式shell中用hive命令来导入本地数据到表目录<br>hive&gt;load data local inpath ‘/root/order.data.2’ into table t_order;</p>
+<p>方式3：用hive命令导入hdfs中的数据文件到表目录<br>hive&gt;load data inpath ‘/access.log.2017-08-06.log’ into table t_access partition(dt=’20170806’);</p>
+<p>注意：导本地文件和导HDFS文件的区别：<br>本地文件导入表：复制<br>hdfs文件导入表：移动</p>
+<p>1.1.2. 将hive表中的数据导出到指定路径的文件<br>1、将hive表中的数据导入HDFS的文件<br>insert overwrite directory ‘/root/access-data’<br>row format delimited fields terminated by ‘,’<br>select * from t_access;</p>
+<p>2、将hive表中的数据导入本地磁盘文件<br>insert overwrite local directory ‘/root/access-data’<br>row format delimited fields terminated by ‘,’<br>select * from t_access limit 100000;</p>
+<p>1.1.3. hive文件格式<br>HIVE支持很多种文件格式： SEQUENCE FILE | TEXT FILE | PARQUET FILE | RC FILE<br>create table t_pq(movie string,rate int)  stored as textfile;<br>create table t_pq(movie string,rate int)  stored as sequencefile;<br>create table t_pq(movie string,rate int)  stored as parquetfile;</p>
+<p>演示：<br>1、先建一个存储文本文件的表<br>create table t_access_text(ip string,url string,access_time string)<br>row format delimited fields terminated by ‘,’<br>stored as textfile;</p>
+<p>导入文本数据到表中：<br>load data local inpath ‘/root/access-data/000000_0’ into table t_access_text;</p>
+<p>2、建一个存储sequence file文件的表：<br>create table t_access_seq(ip string,url string,access_time string)<br>stored as sequencefile;</p>
+<p>从文本表中查询数据插入sequencefile表中，生成数据文件就是sequencefile格式的了：<br>insert into t_access_seq<br>select * from t_access_text;</p>
+<p>3、建一个存储parquet file文件的表：<br>create table t_access_parq(ip string,url string,access_time string)<br>stored as parquetfile;</p>
+<p>1.2. 数据类型<br>1.2.1. 数字类型<br>TINYINT (1字节整数)<br>SMALLINT (2字节整数)<br>INT/INTEGER (4字节整数)<br>BIGINT (8字节整数)<br>FLOAT (4字节浮点数)<br>DOUBLE (8字节双精度浮点数)</p>
+<p>示例：<br>create table t_test(a string ,b int,c bigint,d float,e double,f tinyint,g smallint)</p>
+<p>1.2.2. 时间类型<br>TIMESTAMP (时间戳) (包含年月日时分秒的一种封装)<br>DATE (日期)（只包含年月日）<br>示例，假如有以下数据文件：<br>1,zhangsan,1985-06-302,lisi,1986-07-103,wangwu,1985-08-09<br>那么，就可以建一个表来对数据进行映射<br>create table t_customer(id int,name string,birthday date)<br>row format delimited fields terminated by ‘,’;<br>然后导入数据<br>load data local inpath ‘/root/customer.dat’ into table t_customer;<br>然后，就可以正确查询</p>
+<p>1.2.3. 字符串类型<br>STRING<br>VARCHAR (字符串1-65355长度，超长截断)<br>CHAR (字符串，最大长度255)</p>
+<p>1.2.4. 其他类型<br>BOOLEAN（布尔类型）：true  false<br>BINARY (二进制)：</p>
+<p>1.2.5. 复合类型<br>1.2.5.1. array数组类型<br>arrays: ARRAY&lt;data_type&gt; )</p>
+<p>示例：array类型的应用<br>假如有如下数据需要用hive的表去映射：<br>战狼2,吴京:吴刚:龙母,2017-08-16三生三世十里桃花,刘亦菲:痒痒,2017-08-20<br>设想：如果主演信息用一个数组来映射比较方便</p>
+<p>建表：<br>create table t_movie(moive_name string,actors array<string>,first_show date)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;<br>导入数据：<br>load data local inpath ‘/root/movie.dat’ into table t_movie;</string></p>
+<p>查询：<br>select * from t_movie;<br>select moive_name,actors[0] from t_movie;<br>select moive_name,actors from t_movie where array_contains(actors,’吴刚’);<br>select moive_name,size(actors) from t_movie;<br>1.2.5.2. map类型<br>maps: MAP&lt;primitive_type, data_type&gt; </p>
+<p>1) 假如有以下数据：<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,282,lisi,father:mayun#mother:huangyi#brother:guanyu,223,wangwu,father:wangjianlin#mother:ruhua#sister:jingtian,294,mayun,father:mayongzhen#mother:angelababy,26<br>可以用一个map类型来对上述数据中的家庭成员进行描述</p>
+<p>2) 建表语句：<br>create table t_person(id int,name string,family_members map&lt;string,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
+<p>3) 查询<br>select * from t_person;</p>
+<h2 id="取map字段的指定key的值"><a href="#取map字段的指定key的值" class="headerlink" title="取map字段的指定key的值"></a>取map字段的指定key的值</h2><p>select id,name,family_members[‘father’] as father from t_person;</p>
+<h2 id="取map字段的所有key"><a href="#取map字段的所有key" class="headerlink" title="取map字段的所有key"></a>取map字段的所有key</h2><p>select id,name,map_keys(family_members) as relation from t_person;</p>
+<h2 id="取map字段的所有value"><a href="#取map字段的所有value" class="headerlink" title="取map字段的所有value"></a>取map字段的所有value</h2><p>select id,name,map_values(family_members) from t_person;<br>select id,name,map_values(family_members)[0] from t_person;</p>
+<h2 id="综合：查询有brother的用户信息"><a href="#综合：查询有brother的用户信息" class="headerlink" title="综合：查询有brother的用户信息"></a>综合：查询有brother的用户信息</h2><p>select id,name,fatherfrom(select id,name,family_members[‘brother’] as father from t_person) tmpwhere father is not null;</p>
+<p>1.2.5.3. struct类型<br>structs: STRUCT&lt;col_name : data_type, …&gt;</p>
+<p>1) 假如有如下数据：<br>1,zhangsan,18:male:beijing2,lisi,28:female:shanghai</p>
+<p>其中的用户信息包含：年龄：整数，性别：字符串，地址：字符串<br>设想用一个字段来描述整个用户信息，可以采用struct</p>
+<p>2) 建表：<br>create table t_person_struct(id int,name string,info struct<a href="age:int,sex:string,addr:string" target="_blank" rel="noopener">age:int,sex:string,addr:string</a>)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</p>
+<p>3) 查询<br>select * from t_person_struct;<br>select id,name,info.age from t_person_struct;</p>
+<p>1.3. 修改表定义<br>仅修改Hive元数据，不会触动表中的数据，用户需要确定实际的数据布局符合元数据的定义。</p>
+<p>修改表名：<br>ALTER TABLE table_name RENAME TO new_table_name</p>
+<p>示例：alter table t_1 rename to t_x;</p>
+<p>修改分区名：<br>alter table t_partition partition(department=’xiangsheng’,sex=’male’,howold=20) rename to partition(department=’1’,sex=’1’,howold=20);</p>
+<p>添加分区：<br>alter table t_partition add partition (department=’2’,sex=’0’,howold=40);</p>
+<p>删除分区：<br>alter table t_partition drop partition (department=’2’,sex=’2’,howold=24);</p>
+<p>修改表的文件格式定义：<br>ALTER TABLE table_name [PARTITION partitionSpec] SET FILEFORMAT file_format</p>
+<p>alter table t_partition partition(department=’2’,sex=’0’,howold=40 ) set fileformat sequencefile;</p>
+<p>修改列名定义：<br>ALTER TABLE table_name CHANGE [COLUMN] col_old_name col_new_name column_type [COMMENTcol_comment] [FIRST|(AFTER column_name)]  </p>
+<p>alter table t_user change price jiage float first;</p>
+<p>增加/替换列：<br>ALTER TABLE table_name ADD|REPLACE COLUMNS (col_name data_type[COMMENT col_comment], …)  </p>
+<p>alter table t_user add columns (sex string,addr string);<br>alter table t_user replace columns (id string,age int,price float);</p>
+<ol>
+<li>hive查询语法<br>sql是一门面向集合的编程语言；<br>单行方法<br>public string lower(String word){<br>return word.getlower()<br>}<br>——-lower(name)———</li>
+</ol>
+<hr>
+<p>提交hive的时候时间需要同步<br>yum install -y ntp<br>ntpdate 0.asia.pool.ntp.org</p>
+<p>提示：在做小数据量查询测试时，可以让hive将mrjob提交给本地运行器运行，可以在hive会话中设置如下参数：<br>hive&gt; set hive.exec.mode.local.auto=true;<br>1.1. 基本查询示例<br>select <em> from t_access;<br>select count(</em>) from t_access;<br>select max(ip) from t_access;<br>1.2. 条件查询<br>select <em> from t_access where access_time&lt;’2017-08-06 15:30:20’<br>select </em> from t_access where access_time&lt;’2017-08-06 16:30:20’ and ip&gt;’192.168.33.3’;<br>1.3. join关联查询示例<br>假如有a.txt文件<br>a,1b,2c,3d,4</p>
+<p>假如有b.txt文件<br>a,xxb,yyd,zze,pp</p>
+<p>进行各种join查询：<br>1、inner join（join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a ajoin t_b bon a.name=b.name</p>
+<p>结果：<br>+——–+——–+——–+——–+–+| aname  | anumb  | bname  | bnick  |+——–+——–+——–+——–+–+| a      | 1      | a      | xx     || b      | 2      | b      | yy     || d      | 4      | d      | zz     |+——–+——–+——–+——–+–+</p>
+<p>2、left outer join（left join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a aleft outer join t_b bon a.name=b.name</p>
+<p>结果：</p>
+<p>3、right outer join（right join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a aright outer join t_b bon a.name=b.name</p>
+<p>结果：</p>
+<p>4、full outer join（full join）<br>selecta.name as aname,a.numb as anumb,b.name as bname,b.nick as bnickfrom t_a afull join t_b bon a.name=b.name;</p>
+<p>结果：</p>
+<p>1.4. left semi join<br>Left semi join ：相当于join连接两个表后产生的数据中的左半部分<br>hive中不支持exist/IN子查询，可以用left semi join来实现同样的效果：<br>selecta.name as aname,a.numb as anumbfrom t_a aleft semi join t_b bon a.name=b.name;</p>
+<p>结果：</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:hcfq2018@163.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

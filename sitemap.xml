@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/12/17/hello-world/</loc>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E6%80%BB%E7%BB%93/</loc>
     
-    <lastmod>2018-12-17T11:47:07.052Z</lastmod>
+    <lastmod>2018-12-17T12:36:25.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2018-12-17T12:30:17.561Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2018-12-17T12:28:03.216Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2018-12-17T12:27:12.397Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2018-12-17T12:23:42.992Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E6%A1%88%E4%BE%8B/</loc>
+    
+    <lastmod>2018-12-17T12:23:05.203Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2018-12-17T12:22:03.348Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2018-12-17T12:18:53.020Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E5%87%BD%E6%95%B0%E5%A4%A7%E5%85%A8/</loc>
+    
+    <lastmod>2018-12-17T12:15:58.986Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/12/17/hive/hive-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2018-12-17T12:12:56.989Z</lastmod>
     
   </url>
   

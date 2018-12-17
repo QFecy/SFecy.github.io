@@ -10,6 +10,9 @@
 
     <!--Description-->
     
+        <meta name="description" content="Hive中的四个by1、order by 对全局数据的一个排序，仅仅有一个reduce（其实他就是对最终结果的一个排序）2、sort by 对每一个reduce内部进行排序，对全局的结果集没有排序set mapreduce.job.reduces=3;
+insert overwrite local ">
+    
 
     <!--Author-->
     
@@ -18,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Fecy Note">
+        <meta property="og:title" content="hive 总结">
     
 
     <!--Open Graph Description-->
@@ -29,7 +32,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -40,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Archives: 2018 - Fecy Note</title>
+    <title>hive 总结 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,9 +130,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -137,79 +138,68 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">2018</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/mysql-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        mysql 安装
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/12/17/hive/hive-总结/">
+                hive 总结
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-12-17</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>Hive中的四个by<br>1、order by 对全局数据的一个排序，仅仅有一个reduce（其实他就是对最终结果的一个排序）<br>2、sort by 对每一个reduce内部进行排序，对全局的结果集没有排序<br>set mapreduce.job.reduces=3;</p>
+<pre><code>insert overwrite local directory &apos;/home/xiaoniu/sortby-res&apos; 
+</code></pre><p>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select * from emp sort by empno asc;</p>
+<pre><code>相当于对于每个分区的数据进行排序（也就是每个reduce里面的数据进行了排序）
+</code></pre><p>3、distribute by<br>    分区 partition<br>    类似于MapReduce中分区partition的功能，对数据进行分区的，通常结合sort by进行使用<br>insert overwrite local directory ‘/home/xiaoniu/distby-res’<br>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select <em> from emp distribute by deptno sort by empno asc;<br>    注意事项：<br>        distribute by必须要在sort by 之前<br>4、cluster by<br>    当distribute by和sort by字段相同时，可以使用cluster by<br>    注意被cluster by指定的列只能是降序，不能指定asc和desc<br>insert overwrite local directory ‘/home/xiaoniu/clusterby-res’<br>ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’<br>COLLECTION ITEMS TERMINATED BY ‘\n’<br>select </em> from emp cluster by empno ;</p>
+<p>Hive函数<br>Hive调优<br>1、FetchTack(抓取任务)<br>从配置项的功能是直接抓取数据出来<br>在配置文件中可以设置hive-default.xml.tmplate中<br>     “<property><br>        <name>hive.fetch.task.conversion</name><br>        <value>more</value><br>        <description><br>          Expects one of [none, minimal, more].<br>          Some select queries can be converted to single FETCH task minimizing latency.Currently the query should be single sourced not having any subquery and should not have any aggregations or distincts (which incurs RS), lateral views and joins.</description></property></p>
+<pre><code>    0. none : disable hive.fetch.task.conversion
+   1. minimal : SELECT STAR(*), FILTER on partition columns(分区列的过滤), LIMIT only
+    2. more    : SELECT, FILTER, LIMIT only (support TABLESAMPLE and virtual columns)
+  &lt;/description&gt;
+&lt;/property&gt;&quot;    
+</code></pre><p>set hive.fetch.task.conversion =more;</p>
+<p>2、高级优化<br>    1）大表的拆分，拆成小表<br>        将大表中(字段较多)有用的个别字段拿出来创建成子表,减少数据量<br>        可以创建一张子表通过查询语句</p>
+<pre><code>2）分区表（为了节省查询时间）
+</code></pre><p>一级分区<br>二级分区<br>    3）数据存储格式<br>        textfile格式<br>        orcfile格式<br>        parquet格式<br>4）sql语句的优化<br>比如：调整Join顺序，让多次Join产生的中间数据尽可能小，选择不同的Join策略</p>
+<p>3、参数调优<br>set mapred.max.split.size= 100000000;  // 决定每个map处理的最大的文件大小，单位为B<br>set mapred.min.split.size.per.node= 100000000;  //节点中可以处理的最小的文件大小<br>set mapred.min.split.size.per.rack= 100000000;  // 机架中可以处理的最小的文件大小<br>set hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat;  //执行Map前进行小文件合并</p>
+<p>在开启了org.apache.hadoop.hive.ql.io.CombineHiveInputFormat后，一个data node节点上多个小文件会进行合并，合并文件数由mapred.max.split.size限制的大小决定。<br>mapred.min.split.size.per.node决定了多个data node上的文件是否需要合并~<br>mapred.min.split.size.per.rack决定了多个交换机上的文件是否需要合并~</p>
+<p>set hive.merge.size.per.task = 64000000; //合并文件的大小<br>set hive.merge.smallfiles.avgsize=100000000;  //当输出文件的平均大小小于该值时，启动一个独立的map-reduce任务进行文件merge<br>set hive.exec.reducers.bytes.per.reducer=512000000; //一个job会有多少个reducer来处理，依据的是输入文件的总大小。默认1GB。</p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-案例/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 案例
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-总结/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 总结
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-安装/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 安装
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-使用/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 使用
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-笔记/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive 笔记
-    </a>
-</div>
-            
-                <div class="archive-post">
-    <a href="/2018/12/17/hive/hive-函数大全/">
-        <span class="archive-date">
-            Dec 2018
-        </span>
-        hive Hive函数大全
-    </a>
-</div>
-            
         </section>
+
     </div>
 </div>
+
 
 </div>
 
