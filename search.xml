@@ -3,75 +3,9 @@
   
     
     <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(3)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(2)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(2)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(4)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(4)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(5)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(5)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(7)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(7)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(6)/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(6)/</url>
-      
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC/</url>
+      <title>Flume 使用</title>
+      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/"/>
+      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/</url>
       
         <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
       
@@ -85,17 +19,6 @@
       <url>/2018/12/17/hive/hive-%E5%AE%89%E8%A3%85/</url>
       
         <content type="html"><![CDATA[<p>——–hive的安装流程<br>——–准备工作<br>——–mysql安装<br>——–hive元数据库的配置<br>——–hive启动服务<br><a id="more"></a></p><p>准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）<br>安装：直接解压一个hive安装包即可<br>此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库<br>此模式不便于让团队成员之间共享协作</p><p>1.1.1. mysql安装<br>yum安装</p><p>①　给root用户授予从任何机器上登陆mysql服务器的权限：<br>mysql&gt; grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘你的密码’ with grant option;<br>Query OK, 0 rows affected (0.00 sec)</p><p>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br>注意点：要让mysql可以远程登录访问<br>最直接测试方法：从windows上用Navicat去连接，能连，则可以，不能连，则要去mysql的机器上用命令行客户端进行授权：<br>在mysql的机器上,启动命令行客户端：<br>mysql -uroot -proot<br>mysql&gt;grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root的密码’ with grant option;<br>mysql&gt;flush privileges;</p><p>1.1.2. hive的元数据库配置<br>vi conf/hive-site.xml</p><configuration><property><name>javax.jdo.option.ConnectionURL</name><value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true</value><description>JDBC connect string for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionDriverName</name><value>com.mysql.jdbc.Driver</value><description>Driver class name for a JDBC metastore</description></property> <property><name>javax.jdo.option.ConnectionUserName</name><value>root</value><description>username to use against metastore database</description></property> <property><name>javax.jdo.option.ConnectionPassword</name><value>123456</value><description>password to use against metastore database</description></property></configuration><p>2、上传一个mysql的驱动jar包到hive的安装目录的lib中</p><p>3、配置HADOOP_HOME 和HIVE_HOME到系统环境变量中：/etc/profile<br>4、source /etc/profile<br>5、hive启动测试<br>然后用命令启动hive交互界面：<br>[root@hdp20-04 ~]# hive</p><p>设置一些基本参数，让hive使用起来更便捷，比如：<br>1、让提示符显示当前库：<br>hive&gt;set hive.cli.print.current.db=true;<br>2、显示查询结果时显示字段名称：<br>hive&gt;set hive.cli.print.header=true;</p><p>但是这样设置只对当前会话有效，重启hive会话后就失效，解决办法：<br>在linux的当前用户目录中，编辑一个.hiverc文件，将参数写入其中：<br>vi .hiverc<br>set hive.cli.print.header=true;set hive.cli.print.current.db=true;</p><p>1.1. 启动hive服务使用<br>启动hive的服务：<br>[root@hdp20-04 hive-1.2.1]# bin/hiveserver2 -hiveconf hive.root.logger=DEBUG,console</p><p>上述启动，会将这个服务启动在前台，如果要启动在后台，则命令如下：<br>nohup bin/hiveserver2 1&gt;/dev/null 2&gt;&amp;1 &amp;</p><p>启动成功后，可以在别的节点上用beeline去连接<br>v 方式（1）<br>[root@hdp20-04 hive-1.2.1]# bin/beeline  回车，进入beeline的命令界面<br>输入命令连接hiveserver2<br>beeline&gt; !connect jdbc:hive2://fecy-hadoop02:10000<br>（hadoop01是hiveserver2所启动的那台主机名，端口默认是10000）<br>v 方式（2）<br>启动时直接连接：<br>bin/beeline -u jdbc:hive2://mini1:10000 -n root</p><p>接下来就可以做正常sql查询了</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    <entry>
-      <title>MYSQL 安装</title>
-      <link href="/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/"/>
-      <url>/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/</url>
-      
-        <content type="html"><![CDATA[<p>——–mysql 安装详细流程<br><a id="more"></a></p><p>1：删除mysql的东西</p><p>[root@master ~]# rpm -e –nodeps mysql<br>1<br>2：安装mysql</p><p>[root@master ~]# yum install -y mysql-server mysql mysql-deve<br>1<br>3：启动mysql</p><p>[root@master ~]# service mysqld start<br>1<br>4：为mysql的root账号设置密码</p><p>[root@master ~]# mysqladmin -u root password ‘123456’<br>1<br>5：使用密码登陆mysql</p><p>[root@master ~]# mysql -uroot -p123456<br>1<br>6：现在你已经可以使用了，但是现在仅限于在本机上使用，如果想要在其他电脑上也能够链接到，可以为其他电脑授予链接权限，下面是给所有电脑链接权限 </p><p><1>登陆到mysql数据库</1></p><p>[root@master ~]# mysql -uroot -p123456<br>1<br><strong><2>进入到mysql数据库（此mysql是mysql自带的一个数据库，要区分清楚）</2></strong><br>1<br>mysql&gt; use mysql<br>1<br><strong><3>为其他电脑授权链接</3></strong><br>1<br>这个是为单个电脑ip授权的：<br>mysql&gt; GRANT select，insert，update，delete ON <em>.</em> TO root@”172.16.16.152” IDENTIFIED BY “youpassword”;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>    <strong>或者：</strong><br>1<br>为所有IP都赋予连接权限：<br>        mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>7: 自启动（如果你需要电脑启动，mysql就会自己启动可以执行下面的语句，如果不需要就可以不执行，每次启动的时候使用service mysqld start）</p><p>[root@master ~]# chkconfig mysqld on<br>1<br>ps：如果其他电脑还是不能链接上，你要看看防火墙是否关闭,可以使用service iptables stop</p><hr><p>作者：韩利鹏<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045" target="_blank" rel="noopener">https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>]]></content>
       
       
       
@@ -124,11 +47,11 @@
     </entry>
     
     <entry>
-      <title>Hive 安装</title>
-      <link href="/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/"/>
-      <url>/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/</url>
+      <title>MYSQL 安装</title>
+      <link href="/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/"/>
+      <url>/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/</url>
       
-        <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
+        <content type="html"><![CDATA[<p>——–mysql 安装详细流程<br><a id="more"></a></p><p>1：删除mysql的东西</p><p>[root@master ~]# rpm -e –nodeps mysql<br>1<br>2：安装mysql</p><p>[root@master ~]# yum install -y mysql-server mysql mysql-deve<br>1<br>3：启动mysql</p><p>[root@master ~]# service mysqld start<br>1<br>4：为mysql的root账号设置密码</p><p>[root@master ~]# mysqladmin -u root password ‘123456’<br>1<br>5：使用密码登陆mysql</p><p>[root@master ~]# mysql -uroot -p123456<br>1<br>6：现在你已经可以使用了，但是现在仅限于在本机上使用，如果想要在其他电脑上也能够链接到，可以为其他电脑授予链接权限，下面是给所有电脑链接权限 </p><p><1>登陆到mysql数据库</1></p><p>[root@master ~]# mysql -uroot -p123456<br>1<br><strong><2>进入到mysql数据库（此mysql是mysql自带的一个数据库，要区分清楚）</2></strong><br>1<br>mysql&gt; use mysql<br>1<br><strong><3>为其他电脑授权链接</3></strong><br>1<br>这个是为单个电脑ip授权的：<br>mysql&gt; GRANT select，insert，update，delete ON <em>.</em> TO root@”172.16.16.152” IDENTIFIED BY “youpassword”;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>    <strong>或者：</strong><br>1<br>为所有IP都赋予连接权限：<br>        mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>7: 自启动（如果你需要电脑启动，mysql就会自己启动可以执行下面的语句，如果不需要就可以不执行，每次启动的时候使用service mysqld start）</p><p>[root@master ~]# chkconfig mysqld on<br>1<br>ps：如果其他电脑还是不能链接上，你要看看防火墙是否关闭,可以使用service iptables stop</p><hr><p>作者：韩利鹏<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045" target="_blank" rel="noopener">https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>]]></content>
       
       
       

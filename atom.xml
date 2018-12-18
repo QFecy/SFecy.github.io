@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-17T14:05:40.257Z</updated>
+  <updated>2018-12-18T02:46:34.932Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,143 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (3)/</id>
+    <title>Flume 使用</title>
+    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用/</id>
     <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(2)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (2)/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(4)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (4)/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(5)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (5)/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(7)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (7)/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC%20(6)/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本 (6)/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
-    
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用 - 副本/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
+    <updated>2018-12-18T02:46:34.932Z</updated>
     
     <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
     
@@ -182,24 +50,6 @@
     <summary type="html">
     
       &lt;p&gt;——–hive的安装流程&lt;br&gt;——–准备工作&lt;br&gt;——–mysql安装&lt;br&gt;——–hive元数据库的配置&lt;br&gt;——–hive启动服务&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL 安装</title>
-    <link href="http://yoursite.com/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2018/12/17/hive/mysql-安装/</id>
-    <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:01:25.780Z</updated>
-    
-    <content type="html"><![CDATA[<p>——–mysql 安装详细流程<br><a id="more"></a></p><p>1：删除mysql的东西</p><p>[root@master ~]# rpm -e –nodeps mysql<br>1<br>2：安装mysql</p><p>[root@master ~]# yum install -y mysql-server mysql mysql-deve<br>1<br>3：启动mysql</p><p>[root@master ~]# service mysqld start<br>1<br>4：为mysql的root账号设置密码</p><p>[root@master ~]# mysqladmin -u root password ‘123456’<br>1<br>5：使用密码登陆mysql</p><p>[root@master ~]# mysql -uroot -p123456<br>1<br>6：现在你已经可以使用了，但是现在仅限于在本机上使用，如果想要在其他电脑上也能够链接到，可以为其他电脑授予链接权限，下面是给所有电脑链接权限 </p><p><1>登陆到mysql数据库</1></p><p>[root@master ~]# mysql -uroot -p123456<br>1<br><strong><2>进入到mysql数据库（此mysql是mysql自带的一个数据库，要区分清楚）</2></strong><br>1<br>mysql&gt; use mysql<br>1<br><strong><3>为其他电脑授权链接</3></strong><br>1<br>这个是为单个电脑ip授权的：<br>mysql&gt; GRANT select，insert，update，delete ON <em>.</em> TO root@”172.16.16.152” IDENTIFIED BY “youpassword”;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>    <strong>或者：</strong><br>1<br>为所有IP都赋予连接权限：<br>        mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>7: 自启动（如果你需要电脑启动，mysql就会自己启动可以执行下面的语句，如果不需要就可以不执行，每次启动的时候使用service mysqld start）</p><p>[root@master ~]# chkconfig mysqld on<br>1<br>ps：如果其他电脑还是不能链接上，你要看看防火墙是否关闭,可以使用service iptables stop</p><hr><p>作者：韩利鹏<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045" target="_blank" rel="noopener">https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;——–mysql 安装详细流程&lt;br&gt;
     
     </summary>
     
@@ -243,21 +93,17 @@
   </entry>
   
   <entry>
-    <title>Hive 安装</title>
-    <link href="http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2018/12/17/Flume&amp;Sqoop/Flume使用/</id>
+    <title>MYSQL 安装</title>
+    <link href="http://yoursite.com/2018/12/17/hive/mysql-%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2018/12/17/hive/mysql-安装/</id>
     <published>2018-12-17T12:12:12.000Z</published>
-    <updated>2018-12-17T14:05:40.257Z</updated>
+    <updated>2018-12-17T14:01:25.780Z</updated>
     
-    <content type="html"><![CDATA[<hr><hr><hr><hr><hr><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>——–mysql 安装详细流程<br><a id="more"></a></p><p>1：删除mysql的东西</p><p>[root@master ~]# rpm -e –nodeps mysql<br>1<br>2：安装mysql</p><p>[root@master ~]# yum install -y mysql-server mysql mysql-deve<br>1<br>3：启动mysql</p><p>[root@master ~]# service mysqld start<br>1<br>4：为mysql的root账号设置密码</p><p>[root@master ~]# mysqladmin -u root password ‘123456’<br>1<br>5：使用密码登陆mysql</p><p>[root@master ~]# mysql -uroot -p123456<br>1<br>6：现在你已经可以使用了，但是现在仅限于在本机上使用，如果想要在其他电脑上也能够链接到，可以为其他电脑授予链接权限，下面是给所有电脑链接权限 </p><p><1>登陆到mysql数据库</1></p><p>[root@master ~]# mysql -uroot -p123456<br>1<br><strong><2>进入到mysql数据库（此mysql是mysql自带的一个数据库，要区分清楚）</2></strong><br>1<br>mysql&gt; use mysql<br>1<br><strong><3>为其他电脑授权链接</3></strong><br>1<br>这个是为单个电脑ip授权的：<br>mysql&gt; GRANT select，insert，update，delete ON <em>.</em> TO root@”172.16.16.152” IDENTIFIED BY “youpassword”;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>    <strong>或者：</strong><br>1<br>为所有IP都赋予连接权限：<br>        mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘youpassword’ WITH GRANT OPTION;<br>        mysql&gt; FLUSH PRIVILEGES;<br>        mysql&gt; exit<br>1<br>2<br>3<br>4<br>7: 自启动（如果你需要电脑启动，mysql就会自己启动可以执行下面的语句，如果不需要就可以不执行，每次启动的时候使用service mysqld start）</p><p>[root@master ~]# chkconfig mysqld on<br>1<br>ps：如果其他电脑还是不能链接上，你要看看防火墙是否关闭,可以使用service iptables stop</p><hr><p>作者：韩利鹏<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045" target="_blank" rel="noopener">https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/77445045</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>]]></content>
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
+      &lt;p&gt;——–mysql 安装详细流程&lt;br&gt;
     
     </summary>
     
