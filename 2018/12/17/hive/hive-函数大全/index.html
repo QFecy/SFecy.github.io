@@ -10,18 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="Hive函数大全
-一、关系运算：
-
-等值比较: =语法：A=B
-操作类型：所有基本类型
-描述:如果表达式A与表达式B相等，则为TRUE；否则为FALSE
-举例：
-Hive&amp;gt;select 1 from lxw_dual where 1=1;
-1
-
-不等值比较: &amp;lt;&amp;gt;
-语法: A &amp;l">
+        <meta name="description" content="——–Hive函数大全">
     
 
     <!--Author-->
@@ -31,7 +20,7 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hive Hive函数大全">
+        <meta property="og:title" content="Hive函数大全">
     
 
     <!--Open Graph Description-->
@@ -53,7 +42,7 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
 
     <!-- Title -->
     
-    <title>hive Hive函数大全 - Fecy Note</title>
+    <title>Hive函数大全 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -93,7 +82,7 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
         <ul>
             
             <li class="menu-item">
-                <a href="/fecy.xyz">
+                <a href="https://fecy.xyz/">
                     Home
                 </a>
             </li>
@@ -123,7 +112,7 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
             </li>
             
             <li class="menu-item">
-                <a href="/contact.html">
+                <a href="/contact">
                     Contact
                 </a>
             </li>
@@ -158,7 +147,7 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
     <div class="post-header">
         <h1 class="title">
             <a href="/2018/12/17/hive/hive-函数大全/">
-                hive Hive函数大全
+                Hive函数大全
             </a>
         </h1>
         <div class="post-info">
@@ -176,7 +165,8 @@ Hive&amp;gt;select 1 from lxw_dual where 1=1;
         
 
         <!-- Post Content -->
-        <p>Hive函数大全</p>
+        <p>——–Hive函数大全</p>
+<a id="more"></a>
 <p>一、关系运算：</p>
 <ol>
 <li>等值比较: =<pre><code>语法：A=B
@@ -190,8 +180,9 @@ Hive&gt;select 1 from lxw_dual where 1=1;
 <pre><code>语法: A &lt;&gt; B
 </code></pre><p> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A与表达式B不相等，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt;&gt; 2;<br> 1<br>3.小于比较: &lt;</p>
 <pre><code>语法: A &lt; B
-</code></pre><p> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A小于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt; 2;<br> 1</p>
-</li>
+</code></pre><p> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A小于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt; 2;</p>
+<pre><code>1
+</code></pre></li>
 <li><p>小于等于比较: &lt;=<br> 语法: A &lt;= B<br> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A小于或者等于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 1 &lt;= 1;<br> 1</p>
 </li>
 <li><p>大于比较: &gt;<br> 语法: A &gt; B<br> 操作类型:所有基本类型<br>描述:如果表达式A为NULL，或者表达式B为NULL，返回NULL；如果表达式A大于表达式B，则为TRUE；否则为FALSE<br> 举例：<br> hive&gt; select1 from lxw_dual where 2 &gt; 1;<br> 1</p>
@@ -352,10 +343,7 @@ Hive&gt;select 1 from lxw_dual where 1=1;
 </li>
 <li><p>正则表达式替换函数：regexp_replace<br>语法: regexp_replace(string A, string B, string C)<br>返回值: string<br>说明：将字符串A中的符合java正则表达式B的部分替换为C。注意，在有些情况下要使用转义字符,类似oracle中的regexp_replace函数。<br>举例：<br>hive&gt; select regexp_replace(‘foobar’, ‘oo|ar’, ‘’) from lxw_dual;<br>fb</p>
 </li>
-<li><p>json解析函数：get_json_object<br>语法: get_json_object(string json_string, string path)<br>返回值: string<br>说明：解析json的字符串json_string,返回path指定的内容。如果输入的json字符串无效，那么返回NULL。<br>举例：<br>hive&gt; select  get_json_object(‘{“store”:</p>
-<blockquote>
-<p>  {“fruit”:[{“weight”:8,”type”:”apple”},{“weight”:9,”type”:”pear”}],<br>   “bicycle”:{“price”:19.95,”color”:”red”}<br>  },<br> “email”:”amy@only_for_json_udf_test.NET”,<br> “owner”:”amy”<br>}<br>‘,’$.owner’) from lxw_dual;<br>amy</p>
-</blockquote>
+<li><p>json解析函数：get_json_object<br>语法: get_json_object(string json_string, string path)<br>返回值: string<br>说明：解析json的字符串json_string,返回path指定的内容。如果输入的json字符串无效，那么返回NULL。<br>举例：<br>hive&gt; select  get_json_object(‘{“store”:<br>{“fruit”:[{“weight”:8,”type”:”apple”},{“weight”:9,”type”:”pear”}],<br>“bicycle”:{“price”:19.95,”color”:”red”}<br>},<br>“email”:”amy@only_for_json_udf_test.NET”,<br>“owner”:”amy”<br>}<br>‘,’$.owner’) from lxw_dual;<br>amy</p>
 </li>
 <li><p>空格字符串函数：space<br>语法: space(int n)<br>返回值: string<br>说明：返回长度为n的字符串<br>举例：<br>hive&gt; select space(10) from lxw_dual;<br>hive&gt; select length(space(10)) from lxw_dual;<br>10</p>
 </li>
@@ -468,19 +456,19 @@ Hive&gt;select 1 from lxw_dual where 1=1;
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (3)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (2)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (4)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (5)/">Hive 安装</a>
             </li>
             
         </ul>

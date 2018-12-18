@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="hive中有一个默认的库：库名： default库目录：hdfs://hdp20-01:9000/user/hive/warehouse
-新建库：create database db_order;库建好后，在hdfs中会生成一个库目录：hdfs://hdp20-01:9000/user/hive/w">
+        <meta name="description" content="——–Hive的使用">
     
 
     <!--Author-->
@@ -21,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hive 使用">
+        <meta property="og:title" content="Hive 使用">
     
 
     <!--Open Graph Description-->
@@ -43,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>hive 使用 - Fecy Note</title>
+    <title>Hive 使用 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -83,7 +82,7 @@
         <ul>
             
             <li class="menu-item">
-                <a href="/fecy.xyz">
+                <a href="https://fecy.xyz/">
                     Home
                 </a>
             </li>
@@ -113,7 +112,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/contact.html">
+                <a href="/contact">
                     Contact
                 </a>
             </li>
@@ -148,7 +147,7 @@
     <div class="post-header">
         <h1 class="title">
             <a href="/2018/12/17/hive/hive-使用/">
-                hive 使用
+                Hive 使用
             </a>
         </h1>
         <div class="post-info">
@@ -166,7 +165,9 @@
         
 
         <!-- Post Content -->
-        <p>hive中有一个默认的库：<br>库名： default<br>库目录：hdfs://hdp20-01:9000/user/hive/warehouse</p>
+        <p>——–Hive的使用</p>
+<a id="more"></a>
+<p>hive中有一个默认的库：<br>库名： default<br>库目录：hdfs://hdp20-01:9000/user/hive/warehouse</p>
 <p>新建库：<br>create database db_order;<br>库建好后，在hdfs中会生成一个库目录：<br>hdfs://hdp20-01:9000/user/hive/warehouse/db_order.db</p>
 <p>1.1.1. 基本建表语句<br>use db_order;<br>create table t_order(id string,create_time string,amount float,uid string);<br>表建好后，会在所属的库目录中生成一个表目录<br>/user/hive/warehouse/db_order.db/t_order<br>只是，这样建表的话，hive会认为表数据文件中的字段分隔符为 ^A（\001）</p>
 <p>正确的建表语句为：<br>create table t_order(id string,create_time string,amount float,uid string)<br>row format delimited<br>fields terminated by ‘,’;</p>
@@ -207,10 +208,10 @@
 <p>1) 假如有以下数据：<br>1,zhangsan,father:xiaoming#mother:xiaohuang#brother:xiaoxu,282,lisi,father:mayun#mother:huangyi#brother:guanyu,223,wangwu,father:wangjianlin#mother:ruhua#sister:jingtian,294,mayun,father:mayongzhen#mother:angelababy,26<br>可以用一个map类型来对上述数据中的家庭成员进行描述</p>
 <p>2) 建表语句：<br>create table t_person(id int,name string,family_members map&lt;string,string&gt;,age int)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘#’<br>map keys terminated by ‘:’;</p>
 <p>3) 查询<br>select * from t_person;</p>
-<h2 id="取map字段的指定key的值"><a href="#取map字段的指定key的值" class="headerlink" title="取map字段的指定key的值"></a>取map字段的指定key的值</h2><p>select id,name,family_members[‘father’] as father from t_person;</p>
-<h2 id="取map字段的所有key"><a href="#取map字段的所有key" class="headerlink" title="取map字段的所有key"></a>取map字段的所有key</h2><p>select id,name,map_keys(family_members) as relation from t_person;</p>
-<h2 id="取map字段的所有value"><a href="#取map字段的所有value" class="headerlink" title="取map字段的所有value"></a>取map字段的所有value</h2><p>select id,name,map_values(family_members) from t_person;<br>select id,name,map_values(family_members)[0] from t_person;</p>
-<h2 id="综合：查询有brother的用户信息"><a href="#综合：查询有brother的用户信息" class="headerlink" title="综合：查询有brother的用户信息"></a>综合：查询有brother的用户信息</h2><p>select id,name,fatherfrom(select id,name,family_members[‘brother’] as father from t_person) tmpwhere father is not null;</p>
+<p> 取map字段的指定key的值<br>select id,name,family_members[‘father’] as father from t_person;</p>
+<p> 取map字段的所有key<br>select id,name,map_keys(family_members) as relation from t_person;</p>
+<p> 取map字段的所有value<br>select id,name,map_values(family_members) from t_person;<br>select id,name,map_values(family_members)[0] from t_person;</p>
+<p> 综合：查询有brother的用户信息<br>select id,name,fatherfrom(select id,name,family_members[‘brother’] as father from t_person) tmpwhere father is not null;</p>
 <p>1.2.5.3. struct类型<br>structs: STRUCT&lt;col_name : data_type, …&gt;</p>
 <p>1) 假如有如下数据：<br>1,zhangsan,18:male:beijing2,lisi,28:female:shanghai</p>
 <p>其中的用户信息包含：年龄：整数，性别：字符串，地址：字符串<br>设想用一个字段来描述整个用户信息，可以采用struct</p>
@@ -282,19 +283,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (3)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (2)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (4)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (5)/">Hive 安装</a>
             </li>
             
         </ul>

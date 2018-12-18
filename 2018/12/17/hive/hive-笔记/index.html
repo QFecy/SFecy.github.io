@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="注：mr需要时间同步安装hive（jdk，hadoop）一：建表create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;二：删除表drop table t">
+        <meta name="description" content="——–hive的基础操作及示例">
     
 
     <!--Author-->
@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hive 笔记">
+        <meta property="og:title" content="Hive 笔记">
     
 
     <!--Open Graph Description-->
@@ -42,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>hive 笔记 - Fecy Note</title>
+    <title>Hive 笔记 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -82,7 +82,7 @@
         <ul>
             
             <li class="menu-item">
-                <a href="/fecy.xyz">
+                <a href="https://fecy.xyz/">
                     Home
                 </a>
             </li>
@@ -112,7 +112,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/contact.html">
+                <a href="/contact">
                     Contact
                 </a>
             </li>
@@ -147,7 +147,7 @@
     <div class="post-header">
         <h1 class="title">
             <a href="/2018/12/17/hive/hive-笔记/">
-                hive 笔记
+                Hive 笔记
             </a>
         </h1>
         <div class="post-info">
@@ -165,7 +165,9 @@
         
 
         <!-- Post Content -->
-        <p>注：mr需要时间同步<br>安装hive（jdk，hadoop）<br>一：建表<br>create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;<br>二：删除表<br>drop table tablename;<br>三：内部表跟外部表<br>    内部表（一创建的形式，存储的数据在/user/hive/warehouse下面）<br>    外部表（关联一个已经存在的文件夹（HDFS上））<br>    删除的时候：内部表删除表的时候会把数据一并删除，外部表的时候只会删除关联数据<br>create external table t_user (id String,name String) row format delimited fields terminated by ‘ ‘ location ‘/hive/t_user’;<br>四：分区表(分区的字段，不能出现在字段里面)<br>create table t_partition(id String,name String) partitioned by(dt String) row format delimited fields terminated by ‘ ‘;<br>加载数据：load data local inpath ‘/root/user.txt’ into table t_partition partition(dt=”2018-11-01”);</p>
+        <p>——–hive的基础操作及示例</p>
+<a id="more"></a>
+<p>注：mr需要时间同步<br>安装hive（jdk，hadoop）<br>一：建表<br>create table tablename(id string,name string,age int) row format delimited fields terminated by ‘\t’;<br>二：删除表<br>drop table tablename;<br>三：内部表跟外部表<br>    内部表（一创建的形式，存储的数据在/user/hive/warehouse下面）<br>    外部表（关联一个已经存在的文件夹（HDFS上））<br>    删除的时候：内部表删除表的时候会把数据一并删除，外部表的时候只会删除关联数据<br>create external table t_user (id String,name String) row format delimited fields terminated by ‘ ‘ location ‘/hive/t_user’;<br>四：分区表(分区的字段，不能出现在字段里面)<br>create table t_partition(id String,name String) partitioned by(dt String) row format delimited fields terminated by ‘ ‘;<br>加载数据：load data local inpath ‘/root/user.txt’ into table t_partition partition(dt=”2018-11-01”);</p>
 <p>五：数据导入（hadoop fs -put …..）<br>    hdfs中导入 load data inpath ‘/hive/t_user/user.txt’ into table t_user;<br>    从linux文件系统里面进行导入数据  load data local inpath ‘/root/t_person.txt’ into table t_person;<br>六：导出数据(hadoop fs -get ……)<br>    insert overwrite directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select <em> from t_user;<br>    insert overwrite local directory ‘/hdfs/hive’ row format delimited fields terminated by ‘#’ select </em> from t_user;<br>七：文件存储格式<br>    默认存储textfile<br>    stored as textfile;</p>
 <p>基本的数据类型 int string boolean …<br>array类型<br>战狼2,吴京:吴刚:龙母,2017-08-16<br>三生三世十里桃花,刘亦菲:痒痒,2017-08-20</p>
 <p>create table t_movie(movie_name string,actors array<string>,dt date)<br>row format delimited fields terminated by ‘,’<br>collection items terminated by ‘:’;</string></p>
@@ -273,19 +275,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (3)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (2)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (4)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (5)/">Hive 安装</a>
             </li>
             
         </ul>

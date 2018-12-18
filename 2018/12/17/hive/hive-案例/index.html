@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="一、
-cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2”\t”$7”\t”$8”\t”$9 &amp;gt;”day01.csv” } ‘cat market.csv |awk  -F ‘,’  ‘{print “2014-01-02">
+        <meta name="description" content="——–案例要求——–数据格式——–代码及分析">
     
 
     <!--Author-->
@@ -21,7 +20,7 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hive 案例">
+        <meta property="og:title" content="Hive 案例">
     
 
     <!--Open Graph Description-->
@@ -43,7 +42,7 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
 
     <!-- Title -->
     
-    <title>hive 案例 - Fecy Note</title>
+    <title>Hive 案例 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -83,7 +82,7 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
         <ul>
             
             <li class="menu-item">
-                <a href="/fecy.xyz">
+                <a href="https://fecy.xyz/">
                     Home
                 </a>
             </li>
@@ -113,7 +112,7 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
             </li>
             
             <li class="menu-item">
-                <a href="/contact.html">
+                <a href="/contact">
                     Contact
                 </a>
             </li>
@@ -148,7 +147,7 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
     <div class="post-header">
         <h1 class="title">
             <a href="/2018/12/17/hive/hive-案例/">
-                hive 案例
+                Hive 案例
             </a>
         </h1>
         <div class="post-info">
@@ -166,7 +165,29 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
         
 
         <!-- Post Content -->
-        <p>一、</p>
+        <p>——–案例要求<br>——–数据格式<br>——–代码及分析</p>
+<a id="more"></a>
+<p>农产品价格数据分析<br>一 数据描述<br>1）数据参数 该数据每日进行采集汇总。数据范围涵盖全国主要省份（港澳台西藏海南暂无数据）的 180+ 的大型农产品批发市场，380+的农产品品类（由于季节性和地域性等特点，每日的数据中<br>不一定会涵盖全部的农产品品类）。 </p>
+<p>2）数据类型<br>农产品批发市场价格数据    中文名称    英文名称    数据类型<br>    农产品名称    name    STRING<br>    批发价格    price    FLOAT<br>    采集时间    crawl_time    STRING<br>    批发市场名称    market    STRING<br>    省份    province    STRING<br>    城市    city    STRING</p>
+<p>3）数据清理说明<br>该数据暂无敏感数据项<br>数据样例：该数据样例提供了 2014年 1月份的农产品批发价格的数据，每五天汇总一个表格；<br>所用数据：本测试只用 2014 年 1.1-1.5 的数据</p>
+<p>二、功能需求： </p>
+<ol>
+<li><p>数据清洗 将 Excel 格式数据转化为 csv 格式，并实现以下需求：<br>（1）每天 1 个数据文件<br>（2）每个文件中的字段依次如上面“数据类型”表格所示，\t 分隔（shell命令实现）</p>
+</li>
+<li><p>数据清洗 清洗 china-province.txt 中数据，满足下面几个需求：<br>（1）按照逗号切分，每行一个省份</p>
+</li>
+<li><p>农产品市场个数统计<br>（1）统计每个省份的农产品市场总数<br>（2）统计没有农产品市场的省份有哪些<br>（3）统计山东省售卖蛤蜊的农产品市场占全省农产品市场的比例</p>
+</li>
+<li><p>农产品种类统计<br>（1）统计每个省农产品种类总数，找出排名前3的省份<br>（2）统计排名前 3 的省份共同拥有的农产品类型</p>
+</li>
+<li><p>价格区间统计 计算山西省的每种农产品的价格波动趋势，即计算每天价格均值。 某种农产品的价格均值计算公式： PAVG =(PM1+PM2+…+PMn-max(P)-min(P))/(N-2) 其中，P 表示价格，Mn 表示 market，即农产品市场。PM1 表示 M1 农产品市场的该产品 价格，max(P)表示价格最大值，min(P)价格最小值。</p>
+</li>
+</ol>
+<p>———————————————————–分割线—————————————————————–</p>
+<p>数据示例:</p>
+<p>农产品品类    2014年1月1日    2014年1月2日     2014年1月3日     2014年1月4日    2014年1月5日    批发市场名称    省份    城市<br>香菜    2.80    4.00    4.00    4.00    2.20    山西汾阳市晋阳农副产品批发市场    山西    汾阳<br>大葱    2.80    2.80    2.80    2.80    2.60    山西汾阳市晋阳农副产品批发市场    山西    汾阳</p>
+<p>———————————————————–分割线—————————————————————–</p>
+<p>一、</p>
 <p>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2”\t”$7”\t”$8”\t”$9 &gt;”day01.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-02””\t”$1”\t”$3”\t”$7”\t”$8”\t”$9 &gt;”day02.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-03””\t”$1”\t”$4”\t”$7”\t”$8”\t”$9 &gt;”day03.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-04””\t”$1”\t”$5”\t”$7”\t”$8”\t”$9 &gt;”day04.csv” } ‘<br>cat market.csv |awk  -F ‘,’  ‘{print “2014-01-05””\t”$1”\t”$6”\t”$7”\t”$8”\t”$9 &gt;”day05.csv” } ‘</p>
 <p>二、</p>
 <p> sed -i.bak ‘s#，#\r\n#g’ chinetest.txt</p>
@@ -240,19 +261,19 @@ cat market.csv |awk  -F ‘,’  ‘{print “2014-01-01””\t”$1”\t”$2�
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (3)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (2)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (4)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (5)/">Hive 安装</a>
             </li>
             
         </ul>

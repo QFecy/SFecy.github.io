@@ -10,9 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）安装：直接解压一个hive安装包即可此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库此模式不便于让团队成员之间共享协作
-1.1.1. mysql安装yum安装
-①　给root">
+        <meta name="description" content="——–hive的安装流程——–准备工作——–mysql安装——–hive元数据库的配置——–hive启动服务">
     
 
     <!--Author-->
@@ -22,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hive 安装">
+        <meta property="og:title" content="Hive 安装">
     
 
     <!--Open Graph Description-->
@@ -44,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>hive 安装 - Fecy Note</title>
+    <title>Hive 安装 - Fecy Note</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -84,7 +82,7 @@
         <ul>
             
             <li class="menu-item">
-                <a href="/fecy.xyz">
+                <a href="https://fecy.xyz/">
                     Home
                 </a>
             </li>
@@ -114,7 +112,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/contact.html">
+                <a href="/contact">
                     Contact
                 </a>
             </li>
@@ -149,7 +147,7 @@
     <div class="post-header">
         <h1 class="title">
             <a href="/2018/12/17/hive/hive-安装/">
-                hive 安装
+                Hive 安装
             </a>
         </h1>
         <div class="post-info">
@@ -167,7 +165,8 @@
         
 
         <!-- Post Content -->
-        <p>准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）<br>安装：直接解压一个hive安装包即可<br>此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库<br>此模式不便于让团队成员之间共享协作</p>
+        <p>——–hive的安装流程<br>——–准备工作<br>——–mysql安装<br>——–hive元数据库的配置<br>——–hive启动服务<br><a id="more"></a></p>
+<p>准备工作：安装hive的机器上应该有HADOOP环境（安装目录，HADOOP_HOME环境变量）<br>安装：直接解压一个hive安装包即可<br>此时，安装的这个hive实例使用其内嵌的derby数据库作为记录元数据的数据库<br>此模式不便于让团队成员之间共享协作</p>
 <p>1.1.1. mysql安装<br>yum安装</p>
 <p>①　给root用户授予从任何机器上登陆mysql服务器的权限：<br>mysql&gt; grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘你的密码’ with grant option;<br>Query OK, 0 rows affected (0.00 sec)</p>
 <p>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br>注意点：要让mysql可以远程登录访问<br>最直接测试方法：从windows上用Navicat去连接，能连，则可以，不能连，则要去mysql的机器上用命令行客户端进行授权：<br>在mysql的机器上,启动命令行客户端：<br>mysql -uroot -proot<br>mysql&gt;grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root的密码’ with grant option;<br>mysql&gt;flush privileges;</p>
@@ -219,19 +218,19 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/mysql-安装/">mysql 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (3)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-案例/">hive 案例</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (2)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-总结/">hive 总结</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (4)/">Hive 安装</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2018/12/17/hive/hive-安装/">hive 安装</a>
+                <a class="footer-post" href="/2018/12/17/Flume&Sqoop/Flume使用 - 副本 (5)/">Hive 安装</a>
             </li>
             
         </ul>
